@@ -2,7 +2,7 @@ import React from 'react';
 import './aboutpage.styles.scss';
 
 const AboutPage = () => (
-    <div>About Page Component</div>
+    <h1>About Page Component</h1>
 )
 
 export default AboutPage;

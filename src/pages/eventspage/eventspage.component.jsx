@@ -2,7 +2,7 @@ import React from 'react';
 import './eventspage.styles.scss';
 
 const EventsPage = () => (
-    <div>Events Page Component</div>
+    <h1>Events Page Component</h1>
 )
 
 export default EventsPage;

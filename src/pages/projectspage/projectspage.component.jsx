@@ -2,7 +2,7 @@ import React from 'react';
 import './projectspage.styles.scss';
 
 const ProjectsPage = () => (
-    <div>Projects Page Component</div>
+    <h1>Projects Page Component</h1>
 )
 
 export default ProjectsPage;

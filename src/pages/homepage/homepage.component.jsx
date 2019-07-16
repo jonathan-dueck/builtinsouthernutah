@@ -6,7 +6,7 @@ import PeopleResults from '../../components/people/people-results.component';
 
 const HomePage = () => (
     <div>
-        <h1>People Results</h1>
+        <h1>People</h1>
         <PeopleResults />
     </div>
 )
