@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import './header.styles.scss';
 
-const Header = () => (
+const Header = ({ user }) => (
     <Fragment>
         <div className="header">
             <div className="header-text">
@@ -14,12 +14,20 @@ const Header = () => (
             </div>
         </div>
         <div className="nav-row">
+            {
+                user ? 'logged in' : 'logged out'
+            }
             <a href="/people" className="button">People</a>
             {/* <a href="/events" className="button">Events</a> */}
             {/* <a href="/companies" className="button">Companies</a> */}
             {/* <a href="/projects" className="button">Projects</a> */}
             <a href="/about" className="link">About</a>
-            <a href="/signup" className="button">Sign Up</a>
+            {
+                user ?
+                    <a href="/" className="button">Sign Out</a>
+                    :
+                    <a href="/signup" className="button">Login</a>
+            }
         </div>
     </Fragment>
 )

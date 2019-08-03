@@ -13,7 +13,7 @@ class PersonDetailPage extends React.Component {
         let name = "Some Dev";
         let headshotSrc = "https://via.placeholder.com/300/400";
         let description = "Likes Vue.JS";
-        const { id, /* name, subtitle, headshotSrc, description */ } = this.props;
+        // const { id, name, headshotSrc, description  } = this.props;
         return (
             <Fragment>
                 <div className="person-detail-container">

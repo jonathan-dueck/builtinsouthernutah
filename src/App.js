@@ -11,12 +11,39 @@ import PersonDetailPage from './pages/persondetailpage/persondetailpage.componen
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 
 import { Route, Switch, Redirect } from 'react-router-dom';
+import fire from './config/Firebase';
 
 class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      user: {}
+    }
+  }
+
+  componentDidMount() {
+    this.authListener();
+  }
+
+  authListener() {
+    fire.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user });
+        // localStorage.setItem('BuiltInSouthernUtah', user.uid);
+      } else {
+        this.setState({ user: null });
+        // localStorage.removeItem('user');
+      }
+    })
+  };
+
+
   render() {
     return (
       <div className="App">
-        <Header />
+        <Header currentUser={this.state.user} />
 
         <Switch>
           <Route exact path='/people' component={HomePage} />
@@ -25,7 +52,7 @@ class App extends React.Component {
           <Route exact path='/companies' component={CompaniesPage} />
           <Route exact path='/projects' component={ProjectsPage} />
           <Route exact path='/about' component={AboutPage} />
-          <Route exact path='/signup' component={SignInAndSignUp} />
+          <Route exact path='/signup' render={() => (this.state.user && !this.state.user.length === 0) ? (<Redirect to='/people' />) : (<SignInAndSignUp />)} />
           <Route exact path='/' component={HomePage} />
         </Switch>
 

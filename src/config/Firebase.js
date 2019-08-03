@@ -1,6 +1,7 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
-const firebaseConfig = {
+const config = {
     apiKey: "AIzaSyADmDX6j6wGcJdRtl6SUcn4njBwQjgK7Z4",
     authDomain: "built-in-southern-utah.firebaseapp.com",
     databaseURL: "https://built-in-southern-utah.firebaseio.com",
@@ -10,5 +11,5 @@ const firebaseConfig = {
     appId: "1:280668379984:web:8a67bc0acd2d291f"
 };
 
-const fire = firebase.initializeApp(firebaseConfig);
+const fire = firebase.initializeApp(config);
 export default fire;
