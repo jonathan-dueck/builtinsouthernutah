@@ -21,6 +21,7 @@ class App extends React.Component {
     this.state = {
       user: {}
     }
+    this.authListener = this.authListener.bind(this);
   }
 
   componentDidMount() {
@@ -31,10 +32,10 @@ class App extends React.Component {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({ user });
-        // localStorage.setItem('BuiltInSouthernUtah', user.uid);
+        localStorage.setItem('BuiltInSouthernUtah', user.uid);
       } else {
         this.setState({ user: null });
-        // localStorage.removeItem('user');
+        localStorage.removeItem('user');
       }
     })
   };
