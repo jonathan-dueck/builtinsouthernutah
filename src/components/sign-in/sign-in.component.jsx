@@ -1,14 +1,15 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import fire from '../../config/Firebase';
-import './sign-in.styles.scss';
+import SignInStyles from './sign-in.styles';
+
 
 class SignIn extends React.Component {
+
   constructor(props) {
     super(props);
     this.login = this.login.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.signup = this.signup.bind(this);
     this.state = {
       email: '',
       password: ''
@@ -42,11 +43,10 @@ class SignIn extends React.Component {
 
   render() {
     return (
-      <div>
+      <SignInStyles>
         <h1>Sign In</h1>
         <form>
           <div>
-            <label htmlFor="email">Email Address</label>
             <input
               value={this.state.email}
               onChange={this.handleChange}
@@ -66,10 +66,9 @@ class SignIn extends React.Component {
           </div>
           <div>
             <button type="submit" onClick={this.login}>Log In</button>
-            <button type="submit" onClick={this.signup}>Sign Up</button>
           </div>
         </form>
-      </div>
+      </SignInStyles>
     )
   }
 }

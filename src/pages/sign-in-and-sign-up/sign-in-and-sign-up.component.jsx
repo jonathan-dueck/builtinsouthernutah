@@ -8,7 +8,6 @@ class SignInAndSignUpPage extends React.Component {
     render() {
         return (
             <Fragment>
-                <h1>Sign in and Sign Up Page</h1>
                 <SignIn />
                 <SignUp />
             </Fragment>
