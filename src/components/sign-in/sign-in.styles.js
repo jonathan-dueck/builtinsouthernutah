@@ -9,9 +9,12 @@ const SignInStyles = styled.div`
         margin: 1rem;
         color: white;
         padding:  1rem;
+        transition: 0.2s ease-out;
+
 
         &:hover {
             background-color: #ffc323;
+            color: #000;
         }
     }
     input {

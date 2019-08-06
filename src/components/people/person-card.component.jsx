@@ -1,15 +1,15 @@
 import React from 'react';
 
-import './person-card.styles.scss';
+import PersonCardStyles from './person-card.styles';
 
-const PersonCard = ({ id, name, subtitle, headshotSrc }) => (
-    <div className="person-card">
-        <a href={`/people/${id}`} alt={name}>
-            <img alt="Person Name" src={headshotSrc} className="user-photo" />
-            <div className="user-name">{name}</div>
-            <div className="user-description">{subtitle}</div>
-        </a>
-    </div>
+const PersonCard = ({ id, displayName, title, headshotSrc }) => (
+  <PersonCardStyles>
+    <a href={`/people/${id}`} alt={displayName}>
+      <img alt={displayName} src={headshotSrc} className="user-photo" />
+      <div className="user-name">{displayName}</div>
+      <div className="user-description">{title}</div>
+    </a>
+  </PersonCardStyles>
 );
 
 export default PersonCard;

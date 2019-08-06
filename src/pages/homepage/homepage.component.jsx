@@ -1,14 +1,16 @@
-import React from 'react';
-import './homepage.styles.scss';
+import React, { Fragment } from 'react';
+import PersonGridStyles from './homepage.styles';
 import PeopleResults from '../../components/people/people-results.component';
 
 
 
 const HomePage = () => (
-    <div>
+    <Fragment>
         <h1>People</h1>
-        <PeopleResults />
-    </div>
+        <PersonGridStyles>
+            <PeopleResults />
+        </PersonGridStyles>
+    </Fragment>
 )
 
 export default HomePage;

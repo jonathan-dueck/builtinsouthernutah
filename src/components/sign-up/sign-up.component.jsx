@@ -35,7 +35,8 @@ class SignUp extends React.Component {
   render() {
     return (
       <SignUpStyles>
-        <h1>Sign Up</h1>
+        <h1>Brand New Here?</h1>
+        <p> You don't need to create an account unless you're submitting new content to the site</p>
         <form>
           <div>
             <input
@@ -68,7 +69,7 @@ class SignUp extends React.Component {
             <button type="submit" onClick={this.signup}>Register</button>
           </div>
         </form>
-      </SignUpStyles>
+      </SignUpStyles >
     )
   }
 }

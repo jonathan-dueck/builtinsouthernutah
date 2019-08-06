@@ -32,16 +32,16 @@ class Header extends React.Component {
                 </div>
                 <div className="nav-row">
 
-                    <a href="/people" className="button">People</a>
+                    <a href="/people" className={`button ${(this.props.location.pathname === '/' || this.props.location.pathname === '/people') ? 'active' : ''}`}>People</a>
                     {/* <a href="/events" className="button">Events</a> */}
                     {/* <a href="/companies" className="button">Companies</a> */}
                     {/* <a href="/projects" className="button">Projects</a> */}
-                    <a href="/about" className="link">About</a>
+                    <a href="/about" className={`link ${this.props.location.pathname === '/about' ? 'active' : ''}`}>About</a>
                     {
                         currentUser ?
-                            <button onClick={this.logout} className="button">Sign Out</button>
+                            <a onClick={this.logout} className="link">Sign Out</a>
                             :
-                            <a href="/signup" className="button">Login</a>
+                            <a href="/signup" className={`button ${this.props.location.pathname === '/signup' ? 'active' : ''}`}>Login</a>
                     }
                 </div>
             </Fragment>

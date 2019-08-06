@@ -44,7 +44,8 @@ class SignIn extends React.Component {
   render() {
     return (
       <SignInStyles>
-        <h1>Sign In</h1>
+        <h1>Returning Users</h1>
+        <p>Edit your profile or add fresh content!</p>
         <form>
           <div>
             <input
