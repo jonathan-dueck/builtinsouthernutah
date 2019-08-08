@@ -31,7 +31,7 @@ class PeopleResults extends React.Component {
 	}
 
 	componentDidMount() {
-		db.collection('users').get().then((snapshot) => {
+		db.collection('profiles').get().then((snapshot) => {
 			snapshot.docs.forEach(doc => {
 				const data = doc.data();
 				this.setState({ results: [...this.state.results, data] });
@@ -40,7 +40,7 @@ class PeopleResults extends React.Component {
 	}
 
 	render() {
-		return (
+		; return (
 			this.renderCards()
 		)
 

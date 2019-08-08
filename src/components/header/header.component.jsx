@@ -33,6 +33,14 @@ class Header extends React.Component {
                 <div className="nav-row">
 
                     <a href="/people" className={`button ${(this.props.location.pathname === '/' || this.props.location.pathname.includes('/people')) ? 'active' : ''}`}>People</a>
+
+                    {
+                        currentUser && (
+                            <a href="/profile" className={`button ${(this.props.location.pathname.includes('/profile')) ? 'active' : ''}`}>Your Profile</a>
+                        )
+                    }
+
+
                     {/* <a href="/events" className="button">Events</a> */}
                     {/* <a href="/companies" className="button">Companies</a> */}
                     {/* <a href="/projects" className="button">Projects</a> */}

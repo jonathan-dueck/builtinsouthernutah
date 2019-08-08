@@ -1,30 +1,51 @@
 import React, { Fragment } from 'react';
+import PersonDetailForm from '../../components/people/person-detail-form';
+import PersonDetail from '../../components/people/person-detail.component';
 
-import './persondetailpage.style.scss';
+// import { db } from '../../config/Firebase';
 
 class PersonDetailPage extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            editMode: false,
+            person: {}
+        }
+        this.toggleState = this.toggleState.bind(this);
+    }
+
     componentDidMount() {
         // Fetch this user from the backend, getting user id from address bar
-        console.log("ComponentDidMount");
-    }
-    render() {
 
-        let name = "Some Dev";
-        let headshotSrc = "https://via.placeholder.com/300/400";
-        let description = "Likes Vue.JS";
-        // const { id, name, headshotSrc, description  } = this.props;
+    }
+
+    toggleState(editMode) {
+        this.setState({ editMode });
+    }
+
+    render() {
+        const { id, name, headshotSrc, description } = this.state.person;
+        const { editMode } = this.state;
         return (
             <Fragment>
-                <div className="person-detail-container">
-                    <div className="user-image">
-                        <img className="user-image" alt={name} src={headshotSrc} />
-                    </div>
-                    <div className="user-info-column">
-                        <h1 className="user-name">{name}</h1>
-                        <p className="user-description">{description}</p>
-                    </div>
-                </div>
+                {editMode ?
+                    <PersonDetailForm
+                        id={id}
+                        name={name}
+                        headshotSrc={headshotSrc}
+                        description={description}
+                        editMode={this.toggleState}
+                    />
+                    :
+                    <PersonDetail
+                        id={id}
+                        name={name}
+                        headshotSrc={headshotSrc}
+                        description={description}
+                        editMode={this.toggleState}
+                    />}
             </Fragment>
         );
     }

@@ -40,13 +40,13 @@ class App extends React.Component {
     })
   };
 
-
   render() {
     return (
       <div className="App">
         <Header currentUser={this.state.user} />
 
         <Switch>
+          <Route exact path="/profile" component={PersonDetailPage} />
           <Route exact path='/people' component={HomePage} />
           <Route exact path='/people/:id' component={PersonDetailPage} />
           <Route exact path='/events' component={EventsPage} />
