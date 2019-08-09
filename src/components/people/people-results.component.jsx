@@ -20,8 +20,8 @@ class PeopleResults extends React.Component {
 	renderCards() {
 		const users = this.state.results.map((person) => (
 			<PersonCard
-				id={person.id}
-				key={person.id}
+				id={person.belongsToUser}
+				key={person.belongsToUser}
 				displayName={person.displayName}
 				title={person.title}
 				headshotSrc={person.headshotSrc}
@@ -33,14 +33,17 @@ class PeopleResults extends React.Component {
 	componentDidMount() {
 		db.collection('profiles').get().then((snapshot) => {
 			snapshot.docs.forEach(doc => {
+				// console.log("DOC ", doc)
 				const data = doc.data();
+				// data.id = doc.id;
+				// console.log({ data })
 				this.setState({ results: [...this.state.results, data] });
 			})
 		});
 	}
 
 	render() {
-		; return (
+		return (
 			this.renderCards()
 		)
 

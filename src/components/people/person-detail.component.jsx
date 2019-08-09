@@ -4,16 +4,16 @@ import PersonDetailStyles from './person-detail.styles';
 
 class PersonDetail extends React.Component {
     render() {
-        const { name, headshotSrc, description, editMode } = this.props;
+        const { displayName, headshotSrc, description, editMode } = this.props;
         return (
             <PersonDetailStyles>
                 <p>Person Detail Component</p>
                 <div className="person-detail-container">
                     <div className="user-image">
-                        <img className="user-image" alt={name} src={headshotSrc} />
+                        <img className="user-image" alt={displayName} src={headshotSrc} />
                     </div>
                     <div className="user-info-column">
-                        <h1 className="user-name">{name}</h1>
+                        <h1 className="user-name">{displayName}</h1>
                         <p className="user-description">{description}</p>
                     </div>
                 </div>

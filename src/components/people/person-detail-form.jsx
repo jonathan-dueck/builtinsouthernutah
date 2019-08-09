@@ -7,17 +7,30 @@ class PersonDetailForm extends React.Component {
         super(props);
 
         this.state = {
-            displayname: '',
-            title: '',
-            description: ''
+            displayName: this.props.displayName,
+            title: this.props.title,
+            description: this.props.description
         }
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentDidMount() {
 
+
+    handleChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        console.log("handle submit")
     }
 
     render() {
+        console.log("this.props: ", this.props)
         const { editMode } = this.props;
         return (
             <PersonDetailFormStyles>
@@ -29,7 +42,8 @@ class PersonDetailForm extends React.Component {
                             type="text"
                             name="displayName"
                             placeholder="Publicly Visible Name"
-                            defaultValue={this.state.displayName}
+                            value={this.state.displayName}
+                            onChange={this.handleChange}
                         />
                     </div>
                     <div>
@@ -37,15 +51,18 @@ class PersonDetailForm extends React.Component {
                             type="text"
                             name="title"
                             placeholder="Profile Title, ie: 'Front-end Dev'"
-                            defaultValue={this.state.title}
+                            value={this.state.title}
+                            onChange={this.handleChange}
                         />
                     </div>
                     <textarea name="description"
                         placeholder="Tell the world a little about yourself!"
-                        defaultValue={this.state.description}
+                        onChange={this.handleChange}
+                        value={this.state.description}
                     />
                 </form>
                 <button onClick={() => editMode(false)}>Cancel</button>
+                <button onClick={this.handleSubmit}>Submit</button>
 
             </PersonDetailFormStyles>
         )
