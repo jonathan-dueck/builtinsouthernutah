@@ -14,7 +14,16 @@ const config = {
 
 const fire = firebase.initializeApp(config);
 
+// Google Signin:
+const googleSignIn = () => {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithRedirect(provider)
+}
+// End Google Signin
+
+
 const db = firebase.firestore();
 // db.settings({ timestampsInSnapshots: true });
 export default fire;
 export { db };
+export { googleSignIn }

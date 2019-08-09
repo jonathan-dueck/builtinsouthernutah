@@ -1,7 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import fire from '../../config/Firebase';
+import fire, { googleSignIn } from '../../config/Firebase';
 import SignInStyles from './sign-in.styles';
+import firebase from '../../config/Firebase';
 
 
 class SignIn extends React.Component {
@@ -14,6 +15,14 @@ class SignIn extends React.Component {
       email: '',
       password: ''
     }
+  }
+
+  componentDidMount() {
+    firebase.auth().getRedirectResult().then((result => {
+      if (result && result.user) {
+        this.props.history.push('/people');
+      }
+    }))
   }
 
   handleChange(e) {
@@ -44,6 +53,7 @@ class SignIn extends React.Component {
   render() {
     return (
       <SignInStyles>
+        <button onClick={googleSignIn}>Sign in with Google</button>
         <h1>Returning Users</h1>
         <p>Edit your profile or add fresh content!</p>
         <form>

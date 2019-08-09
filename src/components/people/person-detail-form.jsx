@@ -63,7 +63,7 @@ class PersonDetailForm extends React.Component {
                     />
                 </form>
                 <div className="button-row">
-                    <Button onClick={this.handleSubmit}>Submit</Button>
+                    <Button onClick={this.handleSubmit}>Save</Button>
                     <Button onClick={() => editMode(false)}>Cancel</Button>
                 </div>
 
