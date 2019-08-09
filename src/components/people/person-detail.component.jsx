@@ -1,5 +1,6 @@
 import React from 'react';
 import PersonDetailStyles from './person-detail.styles';
+import Button from '../../globalstyles/button';
 
 
 class PersonDetail extends React.Component {
@@ -17,7 +18,7 @@ class PersonDetail extends React.Component {
                         <p className="user-description">{description}</p>
                     </div>
                 </div>
-                <button onClick={() => editMode(true)}>Edit Profile</button>
+                <Button onClick={() => editMode(true)}>Edit Profile</Button>
             </PersonDetailStyles>
         )
     }

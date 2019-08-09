@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import fire from '../../config/Firebase';
 import './header.styles.scss';
+import Button from '../../globalstyles/button';
 
 class Header extends React.Component {
 
@@ -40,14 +41,13 @@ class Header extends React.Component {
 						)
 					}
 
-
 					{/* <a href="/events" className="button">Events</a> */}
 					{/* <a href="/companies" className="button">Companies</a> */}
 					{/* <a href="/projects" className="button">Projects</a> */}
 					<a href="/about" className={`link ${this.props.location.pathname === '/about' ? 'active' : ''}`}>About</a>
 					{
 						currentUser ?
-							<button onClick={this.logout} className="link">Sign Out</button>
+							<button onClick={this.logout} className="sign-out">Sign Out</button>
 							:
 							<a href="/signup" className={`button ${this.props.location.pathname === '/signup' ? 'active' : ''}`}>Login</a>
 					}

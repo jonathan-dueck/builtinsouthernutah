@@ -15,6 +15,10 @@ const PersonDetailFormStyles = styled.div`
         font-size: 1.5rem;
         text-align: left;
     }
+
+    .button-row {
+        display: flex;
+    }
     
 `;
 

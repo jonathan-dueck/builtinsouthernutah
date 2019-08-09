@@ -1,5 +1,6 @@
 import React from 'react';
 import PersonDetailFormStyles from './person-detail-form.styles';
+import Button from '../../globalstyles/button';
 
 class PersonDetailForm extends React.Component {
 
@@ -61,8 +62,10 @@ class PersonDetailForm extends React.Component {
                         value={this.state.description}
                     />
                 </form>
-                <button onClick={() => editMode(false)}>Cancel</button>
-                <button onClick={this.handleSubmit}>Submit</button>
+                <div className="button-row">
+                    <Button onClick={this.handleSubmit}>Submit</Button>
+                    <Button onClick={() => editMode(false)}>Cancel</Button>
+                </div>
 
             </PersonDetailFormStyles>
         )
