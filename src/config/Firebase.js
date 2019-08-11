@@ -16,14 +16,27 @@ const fire = firebase.initializeApp(config);
 
 // Google Signin:
 const googleSignIn = () => {
-    var provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithRedirect(provider)
+    var googleProvider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithRedirect(googleProvider)
 }
-// End Google Signin
+
+// Github Signin:
+const gitHubSignIn = () => {
+    var githubProvider = new firebase.auth.GithubAuthProvider();
+    firebase.auth().signInWithRedirect(githubProvider)
+}
+
+// Twitter Signin:
+const twitterSignIn = () => {
+    var twitterProvider = new firebase.auth.TwitterAuthProvider();
+    firebase.auth().signInWithRedirect(twitterProvider);
+
+}
+
 
 
 const db = firebase.firestore();
 // db.settings({ timestampsInSnapshots: true });
 export default fire;
 export { db };
-export { googleSignIn }
+export { googleSignIn, gitHubSignIn, twitterSignIn }

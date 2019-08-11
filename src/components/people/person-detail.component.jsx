@@ -8,7 +8,6 @@ class PersonDetail extends React.Component {
         const { displayName, headshotSrc, description, editMode } = this.props;
         return (
             <PersonDetailStyles>
-                <p>Person Detail Component</p>
                 <div className="person-detail-container">
                     <div className="user-image">
                         <img className="user-image" alt={displayName} src={headshotSrc} />

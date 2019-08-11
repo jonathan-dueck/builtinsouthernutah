@@ -34,7 +34,7 @@ class PersonDetailPage extends React.Component {
 	}
 
 	render() {
-		const { id, title, displayName, headshotSrc, description } = this.state.person;
+		const { id, title, displayName, headshotSrc, description, profileVisible, facebook, twitter, linkedin, github, portfolio } = this.state.person;
 		const { editMode } = this.state;
 		return (
 			<Fragment>
@@ -46,7 +46,13 @@ class PersonDetailPage extends React.Component {
 						description={description}
 						editMode={this.toggleState}
 						title={title}
-
+						permission={3}
+						profileVisible={profileVisible}
+						facebook={facebook}
+						twitter={twitter}
+						linkedin={linkedin}
+						github={github}
+						portfolio={portfolio}
 
 					/>
 					:
@@ -57,7 +63,13 @@ class PersonDetailPage extends React.Component {
 						description={description}
 						editMode={this.toggleState}
 						title={title}
-
+						permission={3}
+						profileVisible={profileVisible}
+						facebook={facebook}
+						twitter={twitter}
+						linkedin={linkedin}
+						github={github}
+						portfolio={portfolio}
 					/>}
 			</Fragment>
 		);

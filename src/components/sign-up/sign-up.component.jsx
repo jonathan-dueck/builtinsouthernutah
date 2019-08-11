@@ -45,6 +45,7 @@ class SignUp extends React.Component {
               type="text"
               name="displayName"
               placeholder="Your Name"
+              autoComplete="name"
             />
           </div>
           <div>
@@ -54,6 +55,7 @@ class SignUp extends React.Component {
               type="email"
               name="email"
               placeholder="Email"
+              autocomplete="email"
             />
           </div>
           <div>
@@ -63,13 +65,14 @@ class SignUp extends React.Component {
               type="password"
               name="password"
               placeholder="Your Password"
+              autocomplete="current-password"
             />
           </div>
           <div>
             <button type="submit" onClick={this.signup}>Register</button>
           </div>
         </form>
-      </SignUpStyles >
+      </SignUpStyles>
     )
   }
 }

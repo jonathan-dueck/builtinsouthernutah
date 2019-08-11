@@ -19,6 +19,28 @@ const PersonDetailFormStyles = styled.div`
     .button-row {
         display: flex;
     }
+
+    .form-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .form-label {
+        font-size: 2rem;
+        margin-right: 1rem;
+    }
+    .form-label-img {
+        width: 40px;
+        margin-right: 1rem; 
+    }
+    .form-element {
+
+    }
+    .form-required {
+        color: red;
+        font-size: 3rem;
+        margin-left: 1rem;
+    }
     
 `;
 

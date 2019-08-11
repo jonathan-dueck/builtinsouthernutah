@@ -1,8 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import fire, { googleSignIn } from '../../config/Firebase';
 import SignInStyles from './sign-in.styles';
 import firebase from '../../config/Firebase';
+import fire from '../../config/Firebase';
 
 
 class SignIn extends React.Component {
@@ -53,7 +53,7 @@ class SignIn extends React.Component {
   render() {
     return (
       <SignInStyles>
-        <button onClick={googleSignIn}>Sign in with Google</button>
+
         <h1>Returning Users</h1>
         <p>Edit your profile or add fresh content!</p>
         <form>

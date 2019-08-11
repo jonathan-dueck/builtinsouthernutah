@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import fire from '../../config/Firebase';
 import './header.styles.scss';
-import Button from '../../globalstyles/button';
 
 class Header extends React.Component {
 

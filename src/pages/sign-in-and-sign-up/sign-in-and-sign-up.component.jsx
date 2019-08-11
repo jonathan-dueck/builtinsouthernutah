@@ -2,6 +2,9 @@ import React from 'react';
 import SignInForm from '../../components/sign-in/sign-in.component';
 import SignUpForm from '../../components/sign-up/sign-up.component';
 import SignInUpStyles from './sign-in-and-sign-up.styles';
+import { googleSignIn, gitHubSignIn, twitterSignIn } from '../../config/Firebase';
+import Button from '../../globalstyles/button';
+
 
 class SignInAndSignUpPage extends React.Component {
   constructor(props) {
@@ -16,6 +19,12 @@ class SignInAndSignUpPage extends React.Component {
     return (
       <SignInUpStyles>
         <div className="form-container sign-up-container">
+          <div className="third-party-auth-row">
+            <Button onClick={googleSignIn}>Sign in with Google</Button>
+            <Button onClick={gitHubSignIn}>Sign in with GitHub</Button>
+            <Button onClick={twitterSignIn}>Sign in with Twitter</Button>
+          </div>
+
           {
             this.state.showForm === "signin" && (
               <div className="form-container sign-in-container">

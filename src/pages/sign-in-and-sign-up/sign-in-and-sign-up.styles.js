@@ -16,6 +16,12 @@ const SignInUpStyles = styled.div`
         color: #fff;
     }
 }
+
+.third-party-auth-row {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto;
+}
 `;
 
 export default SignInUpStyles;
