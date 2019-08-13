@@ -41,8 +41,8 @@ class PersonDetailForm extends React.Component {
         const { editMode } = this.props;
         return (
             <PersonDetailFormStyles>
-                <p>Authorization Level: {authLevels(this.props.permission)} </p>
-                <p>Profile Visible: {this.props.profileVisible ? "Yes" : "No"}</p>
+                <p className="user-auth-level">Authorization Level: <strong>{authLevels(this.props.permission)}</strong></p>
+                <p className="user-profile-visible">Profile Visible: <strong>{this.props.profileVisible ? "Yes" : "No"}</strong></p>
                 < form >
                     <div className="user-profile-image">
                         <img alt={this.state.displayName} src={this.state.headshotSrc} />
@@ -90,7 +90,7 @@ class PersonDetailForm extends React.Component {
                             type="text"
                             name="github"
                             placeholder="GitHub URL"
-                            value={this.state.twitter}
+                            value={this.state.github}
                             onChange={this.handleChange}
                             className="form-element"
                         />

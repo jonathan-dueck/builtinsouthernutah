@@ -10,7 +10,35 @@ const PersonDetailFormStyles = styled.div`
         height: 2.5rem;
         width: 40rem;
         padding: 1rem;
+        font-size: 1.5rem;
     }
+
+    label {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    textarea {
+        height: 40px;
+        width: 400px;
+        font-size: 1.8rem;
+        padding: 1rem;
+    }
+
+    .user-auth-level {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .user-profile-image {
+        margin-bottom: 2rem;
+    }
+
+    .user-profile-visible {
+        text-align: center;
+        margin 1rem 0;
+    }
+
     p {
         font-size: 1.5rem;
         text-align: left;

@@ -41,11 +41,11 @@ class PersonDetailPage extends React.Component {
 				{editMode ?
 					<PersonDetailForm
 						id={id}
+						title={title}
 						displayName={displayName}
 						headshotSrc={headshotSrc}
 						description={description}
 						editMode={this.toggleState}
-						title={title}
 						permission={3}
 						profileVisible={profileVisible}
 						facebook={facebook}
@@ -58,11 +58,11 @@ class PersonDetailPage extends React.Component {
 					:
 					<PersonDetail
 						id={id}
+						title={title}
 						displayName={displayName}
 						headshotSrc={headshotSrc}
 						description={description}
 						editMode={this.toggleState}
-						title={title}
 						permission={3}
 						profileVisible={profileVisible}
 						facebook={facebook}
