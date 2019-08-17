@@ -33,10 +33,7 @@ const twitterSignIn = () => {
 
 }
 
-
-
 const db = firebase.firestore();
-// db.settings({ timestampsInSnapshots: true });
 export default fire;
 export { db };
 export { googleSignIn, gitHubSignIn, twitterSignIn }

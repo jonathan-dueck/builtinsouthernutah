@@ -15,6 +15,12 @@ const PersonDetailStyles = styled.div`
         width: 70%;
     }
 
+    .delete-profile {
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 4rem;
+        cursor: pointer;
+    }
 
     .user-name {
         align-items: center;

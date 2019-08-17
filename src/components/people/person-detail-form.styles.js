@@ -36,7 +36,7 @@ const PersonDetailFormStyles = styled.div`
 
     .user-profile-visible {
         text-align: center;
-        margin 1rem 0;
+        margin: 1rem 0;
     }
 
     p {
@@ -46,6 +46,31 @@ const PersonDetailFormStyles = styled.div`
 
     .button-row {
         display: flex;
+    }
+
+    input[type="file"] {
+        display:none;
+    }
+
+    .custom-file-upload {
+        cursor: pointer;
+        background-color: #527ab4;
+        color: white;
+        font-weight: normal;
+        height: 30px;
+        padding: 0.7rem 1rem 0 1rem;
+        border-radius: 2px;
+        margin-top: 0.2rem;
+        transition: .3s;
+        &:hover {
+            background-color: #012c6a;
+        }
+    }
+
+    .upload-buttons {
+        display: flex;
+        align-items: center;
+        margin-left: 50px;
     }
 
     .form-row {

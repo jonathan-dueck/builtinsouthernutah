@@ -18,9 +18,9 @@ class PeopleResults extends React.Component {
 	}
 
 	renderCards() {
-		const users = this.state.results.map((person) => (
+		const users = this.state.results.map((person) => console.log(person) || (
 			<PersonCard
-				id={person.belongsToUser}
+				id={person.id}
 				key={person.belongsToUser}
 				displayName={person.displayName}
 				title={person.title}
@@ -43,9 +43,13 @@ class PeopleResults extends React.Component {
 	}
 
 	render() {
-		return (
-			this.renderCards()
-		)
+		if (this.state.results.length === 0) {
+			return <h2>No user profiles were found.</h2>
+		} else {
+			return (
+				this.renderCards()
+			)
+		}
 
 	}
 }

@@ -36,7 +36,7 @@ class Header extends React.Component {
 
 					{
 						currentUser && (
-							<a href="/profile" className={`button ${(this.props.location.pathname.includes('/profile')) ? 'active' : ''}`}>Your Profile</a>
+							<a href={`/people/${currentUser.uid}`} className={`button ${(this.props.location.pathname.includes('/profile')) ? 'active' : ''}`}>Your Profile</a>
 						)
 					}
 

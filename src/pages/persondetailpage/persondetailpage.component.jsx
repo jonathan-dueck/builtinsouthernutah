@@ -19,7 +19,7 @@ class PersonDetailPage extends React.Component {
 
 	componentDidMount() {
 		// Fetch this user from the backend, getting user id from address bar
-		db.collection('profiles').where("belongsToUser", "==", this.props.match.params.id)
+		db.collection('profiles').where("id", "==", this.props.match.params.id)
 			.get()
 			.then((querySnapshot) => {
 				querySnapshot.forEach((doc) => {
@@ -34,8 +34,9 @@ class PersonDetailPage extends React.Component {
 	}
 
 	render() {
-		const { id, title, displayName, headshotSrc, description, profileVisible, facebook, twitter, linkedin, github, portfolio } = this.state.person;
+		const { title, displayName, headshotSrc, description, profileVisible, facebook, twitter, linkedin, github, portfolio } = this.state.person;
 		const { editMode } = this.state;
+		const id = this.props.match.params.id;
 		return (
 			<Fragment>
 				{editMode ?

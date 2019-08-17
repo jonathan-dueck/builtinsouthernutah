@@ -1,8 +1,33 @@
 import React from 'react';
 import PersonDetailStyles from './person-detail.styles';
 import Button from '../../globalstyles/button';
+import { db } from '../../config/Firebase';
 
 class PersonDetail extends React.Component {
+
+	constructor(props) {
+		super(props);
+
+		this.handleDelete = this.handleDelete.bind(this);
+	}
+
+	handleDelete() {
+		console.log("Delete This Profile");
+		const { id } = this.props;
+		console.log(`We are deleting user ${id}.`)
+
+		if (id) {
+			db.collection('profiles').doc(id).delete().then(() => {
+				console.log("Profile has been deleted.");
+			})
+				.catch((err) => {
+					console.log(err);
+				})
+		} else {
+			console.log("User not found by id.")
+		}
+	}
+
 	render() {
 		const { displayName, title, editMode, headshotSrc, description, profileVisible, facebook, twitter, linkedin, github, portfolio } = this.props;
 
@@ -10,8 +35,6 @@ class PersonDetail extends React.Component {
 			<PersonDetailStyles>
 
 				<div className="person-detail-left">
-
-
 
 					<div className="user-image">
 						<img className="user-image" alt={displayName} src={headshotSrc} />
@@ -67,8 +90,13 @@ class PersonDetail extends React.Component {
 					</div>
 				</div>
 
-
 				<div className="person-detail-right">
+					<span
+						className="delete-profile"
+						onClick={this.handleDelete}
+					>
+						Delete Profile
+					</span>
 
 					<div className="user-info-column">
 						<h1 className="user-name">{displayName}</h1>
@@ -78,10 +106,6 @@ class PersonDetail extends React.Component {
 					<Button onClick={() => editMode(true)}>Edit Profile</Button>
 
 				</div>
-
-
-
-
 			</PersonDetailStyles>
 		)
 	}
