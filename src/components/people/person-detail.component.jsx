@@ -91,11 +91,14 @@ class PersonDetail extends React.Component {
 				</div>
 
 				<div className="person-detail-right">
-					<span
-						className="delete-profile"
-						onClick={this.handleDelete}
-					>
-						Delete Profile
+					<span className="person-detail-buttons">
+						<Button className="edit-profile" onClick={() => editMode(true)}>Edit Profile</Button>
+						<Button
+							className="delete-profile"
+							onClick={this.handleDelete}
+						>
+							Delete Profile
+						</Button>
 					</span>
 
 					<div className="user-info-column">
@@ -103,7 +106,6 @@ class PersonDetail extends React.Component {
 						<h3 className="user-title">{title}</h3>
 						<p className="user-description">{description}</p>
 					</div>
-					<Button onClick={() => editMode(true)}>Edit Profile</Button>
 
 				</div>
 			</PersonDetailStyles>

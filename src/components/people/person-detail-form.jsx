@@ -50,6 +50,7 @@ class PersonDetailForm extends React.Component {
 			displayName,
 			title,
 			description,
+			headshotSrc: headshotSrc || '/images/person-silhouette.png',
 			facebook: facebook || null,
 			twitter: twitter || null,
 			github: github || null,

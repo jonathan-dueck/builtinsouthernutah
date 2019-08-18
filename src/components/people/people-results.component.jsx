@@ -18,10 +18,10 @@ class PeopleResults extends React.Component {
 	}
 
 	renderCards() {
-		const users = this.state.results.map((person) => console.log(person) || (
+		const users = this.state.results.map((person) => (
 			<PersonCard
 				id={person.id}
-				key={person.belongsToUser}
+				key={person.id}
 				displayName={person.displayName}
 				title={person.title}
 				headshotSrc={person.headshotSrc}

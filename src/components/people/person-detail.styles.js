@@ -4,6 +4,7 @@ const PersonDetailStyles = styled.div`
         display: flex;   
         justify-content: space-around; 
 
+
     .person-detail-left, .person-detail-right {
         display: flex;
         flex-direction: column;
@@ -13,13 +14,27 @@ const PersonDetailStyles = styled.div`
     }
     .person-detail-right {
         width: 70%;
+        border: 1px solid black;
+        border-radius: 10px;
+        margin-left: 4rem;
+        margin-right: 4rem;
+        padding: 1.5rem;
+    }
+
+    .person-detail-buttons {
+        display: flex;
+        justify-content: flex-end !important;
+    }
+
+    .edit-profile {
+        cursor: pointer;
+        margin-right: 1rem;
     }
 
     .delete-profile {
-        display: flex;
-        justify-content: flex-end;
-        padding-right: 4rem;
         cursor: pointer;
+        margin-left: 1rem;
+        margin-right: 0;
     }
 
     .user-name {
