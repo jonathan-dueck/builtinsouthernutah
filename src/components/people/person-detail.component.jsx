@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactHtmlParser from 'react-html-parser';
 import PersonDetailStyles from './person-detail.styles';
 import Button from '../../globalstyles/button';
 import { db } from '../../config/Firebase';
@@ -104,7 +105,7 @@ class PersonDetail extends React.Component {
 					<div className="user-info-column">
 						<h1 className="user-name">{displayName}</h1>
 						<h3 className="user-title">{title}</h3>
-						<p className="user-description">{description}</p>
+						<div className="user-description">{ReactHtmlParser(description)}</div>
 					</div>
 
 				</div>
