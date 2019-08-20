@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import PersonDetailFormStyles from './person-detail-form.styles';
+import ReactQuill from 'react-quill';
+import { PersonDetailFormStyles, QuillStyles } from './person-detail-form.styles';
 import Button from '../../globalstyles/button';
 import { authLevels } from '../../utils/auth-levels';
 import { db } from '../../config/Firebase';
@@ -19,14 +20,15 @@ class PersonDetailForm extends React.Component {
 			title: this.props.title,
 			description: this.props.description,
 			headshotSrc: this.props.headshotSrc,
-			twitter: this.props.twitter,
-			github: this.props.github,
-			facebook: this.props.facebook,
-			portfolio: this.props.portfolio,
+			twitter: this.props.twitter || "",
+			github: this.props.github || "",
+			facebook: this.props.facebook || "",
+			portfolio: this.props.portfolio || "",
 			selectedFile: null
 		}
 
 		this.handleChange = this.handleChange.bind(this);
+		this.handleQuillChange = this.handleQuillChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
 		this.fileUploadHandler = this.fileUploadHandler.bind(this);
@@ -38,9 +40,12 @@ class PersonDetailForm extends React.Component {
 		});
 	}
 
+	handleQuillChange(value) {
+		this.setState({ description: value })
+	}
+
 	handleSubmit(e) {
 		e.preventDefault();
-		console.log("handle submit")
 
 		const { permission, profileVisible, displayName, title, description, headshotSrc, twitter, github, facebook, portfolio } = this.state;
 		const { id } = this.props;
@@ -49,7 +54,7 @@ class PersonDetailForm extends React.Component {
 			id,
 			displayName,
 			title,
-			description,
+			description: description || "",
 			headshotSrc: headshotSrc || '/images/person-silhouette.png',
 			facebook: facebook || null,
 			twitter: twitter || null,
@@ -183,11 +188,17 @@ class PersonDetailForm extends React.Component {
 						/>
 					</div>
 					<label htmlFor="description">Tell the world about yourself!</label>
-					<textarea name="description"
-						onChange={this.handleChange}
-						value={this.state.description}
-						className="form-element"
-					/>
+
+					<QuillStyles>
+						<ReactQuill
+							name="description"
+							value={this.state.description}
+							onChange={this.handleQuillChange}
+							theme="snow"
+						/>
+					</QuillStyles>
+
+
 				</form>
 				<div className="button-row">
 					<Button onClick={this.handleSubmit}>Save</Button>
