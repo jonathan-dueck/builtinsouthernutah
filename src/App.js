@@ -11,7 +11,9 @@ import PersonDetailPage from './pages/persondetailpage/persondetailpage.componen
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 
 import { Route, Switch, Redirect } from 'react-router-dom';
-import fire from './config/Firebase';
+import fire, { db } from './config/Firebase';
+
+const UserContext = React.createContext();
 
 class App extends React.Component {
 
@@ -19,9 +21,11 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      user: {}
+      user: {},
+      identification: {}
     }
     this.authListener = this.authListener.bind(this);
+    this.getContext = this.getContext.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +37,7 @@ class App extends React.Component {
       if (user) {
         this.setState({ user });
         localStorage.setItem('BuiltInSouthernUtah', user.uid);
+        this.getContext();
       } else {
         this.setState({ user: null });
         localStorage.removeItem('user');
@@ -40,26 +45,51 @@ class App extends React.Component {
     })
   };
 
+  getContext() {
+    const uid = localStorage.getItem('BuiltInSouthernUtah');
+    const docRef = db.collection('profiles').doc(uid);
+
+    docRef.get().then((doc) => {
+      if (doc.exists) {
+        const userData = doc.data();
+        const userCreds = {
+          permission: userData.permission,
+          id: userData.id
+        }
+        this.setState({ identification: userCreds })
+      } else {
+        console.log("No such document")
+      }
+    }).catch((err) => {
+      console.log("Error getting document", err);
+    })
+  }
+
   render() {
     return (
       <div className="App">
-        <Header currentUser={this.state.user} />
+        <UserContext.Provider value={this.state.identification}>
 
-        <Switch>
-          <Route exact path='/people' component={HomePage} />
-          <Route exact path='/people/:id' component={PersonDetailPage} />
-          <Route exact path='/events' component={EventsPage} />
-          <Route exact path='/companies' component={CompaniesPage} />
-          <Route exact path='/projects' component={ProjectsPage} />
-          <Route exact path='/about' component={AboutPage} />
-          <Route exact path='/signup' render={() => (this.state.user && !this.state.user.length === 0) ? (<Redirect to='/people' />) : (<SignInAndSignUp />)} />
-          <Route exact path='/' component={HomePage} />
-        </Switch>
+          <Header currentUser={this.state.user} />
+          <Switch>
+            <Route exact path='/people' component={HomePage} />
+            <Route exact path='/people/:id' component={PersonDetailPage} />
+            <Route exact path='/events' component={EventsPage} />
+            <Route exact path='/companies' component={CompaniesPage} />
+            <Route exact path='/projects' component={ProjectsPage} />
+            <Route exact path='/about' component={AboutPage} />
+            <Route exact path='/signup' render={() => (this.state.user && !this.state.user.length === 0) ? (<Redirect to='/people' />) : (<SignInAndSignUp />)} />
+            <Route exact path='/' component={HomePage} />
+          </Switch>
 
-        <Footer />
+          <Footer />
+
+        </UserContext.Provider>
+
       </div>
     );
   }
 }
 
+export { UserContext };
 export default App;

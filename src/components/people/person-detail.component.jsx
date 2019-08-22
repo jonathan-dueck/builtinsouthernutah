@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import PersonDetailStyles from './person-detail.styles';
 import Button from '../../globalstyles/button';
@@ -10,14 +10,24 @@ class PersonDetail extends React.Component {
 		super(props);
 
 		this.handleDelete = this.handleDelete.bind(this);
+		this.canEditDelete = this.canEditDelete.bind(this);
+	}
+
+	canEditDelete(profileId, permission) {
+		const userId = localStorage.getItem("BuiltInSouthernUtah");
+		if (permission === 3 || profileId === userId) {
+			return true
+		} else {
+			return false
+		}
 	}
 
 	handleDelete() {
-		console.log("Delete This Profile");
 		const { id } = this.props;
-		console.log(`We are deleting user ${id}.`)
+		const loggedInUser = localStorage.getItem('BuiltInSouthernUtah');
+		const profileIdWeAreVisiting = id;
 
-		if (id) {
+		if (id && (loggedInUser === profileIdWeAreVisiting)) {
 			db.collection('profiles').doc(id).delete().then(() => {
 				console.log("Profile has been deleted.");
 			})
@@ -25,7 +35,7 @@ class PersonDetail extends React.Component {
 					console.log(err);
 				})
 		} else {
-			console.log("User not found by id.")
+			console.log("You don't have permission to delete that.")
 		}
 	}
 
@@ -93,13 +103,29 @@ class PersonDetail extends React.Component {
 
 				<div className="person-detail-right">
 					<span className="person-detail-buttons">
-						<Button className="edit-profile" onClick={() => editMode(true)}>Edit Profile</Button>
-						<Button
-							className="delete-profile"
-							onClick={this.handleDelete}
-						>
-							Delete Profile
-						</Button>
+
+						{this.canEditDelete(this.props.id, this.props.permission) && (
+							<Fragment>
+
+								<Button
+									className="edit-profile"
+									onClick={() => editMode(true, this.props.permission)}
+								>
+									Edit Profile
+					</Button>
+
+								<Button
+									className="delete-profile"
+									onClick={this.handleDelete}
+								>
+									Delete Profile
+					</Button>
+							</Fragment>
+						)}
+
+
+
+
 					</span>
 
 					<div className="user-info-column">

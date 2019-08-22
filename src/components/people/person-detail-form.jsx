@@ -32,6 +32,7 @@ class PersonDetailForm extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
 		this.fileUploadHandler = this.fileUploadHandler.bind(this);
+		this.canEditDelete = this.canEditDelete.bind(this);
 	}
 
 	handleChange(e) {
@@ -44,31 +45,48 @@ class PersonDetailForm extends React.Component {
 		this.setState({ description: value })
 	}
 
+	canEditDelete(profileId, permission) {
+		const userId = localStorage.getItem("BuiltInSouthernUtah");
+		if (permission === 3 || profileId === userId) {
+			return true
+		} else {
+			return false
+		}
+	}
+
 	handleSubmit(e) {
 		e.preventDefault();
-
 		const { permission, profileVisible, displayName, title, description, headshotSrc, twitter, github, facebook, portfolio } = this.state;
-		const { id } = this.props;
+		const { id, editMode } = this.props;
 
-		db.collection('profiles').doc(id).set({
-			id,
-			displayName,
-			title,
-			description: description || "",
-			headshotSrc: headshotSrc || '/images/person-silhouette.png',
-			facebook: facebook || null,
-			twitter: twitter || null,
-			github: github || null,
-			portfolio: portfolio || null,
-			permission: permission || 0,
-			profileVisible: profileVisible || false
-		})
-			.then(() => {
-				console.log("Save Complete")
+		console.log("permission inside handlesubmit:", permission);
+		console.log(("ID: ", id));
+		console.log("Current User: ", localStorage.getItem("BuiltInSouthernUtah"));
+
+
+		if (permission === 3 || (id === localStorage.getItem("BuiltInSouthernUtah"))) {
+			db.collection('profiles').doc(id).set({
+				id,
+				displayName,
+				title,
+				description: description || "",
+				headshotSrc: headshotSrc || '/images/person-silhouette.png',
+				facebook: facebook || null,
+				twitter: twitter || null,
+				github: github || null,
+				portfolio: portfolio || null,
+				permission: permission || 0,
+				profileVisible: profileVisible || false
 			})
-			.catch((error) => {
-				console.error("Error saving document", error);
-			})
+				.then(() => {
+					console.log("Save Complete")
+					editMode(false, 3);
+				})
+				.catch((error) => {
+					console.error("Error saving document", error);
+				})
+		}
+
 	}
 
 	fileSelectedHandler(event) {

@@ -33,7 +33,6 @@ class SignIn extends React.Component {
     e.preventDefault();
     fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
       .then((result => {
-        console.log("return from login. Should redirect to /people now.");
         this.props.history.push('/people');
       }))
       .catch((error) => {
