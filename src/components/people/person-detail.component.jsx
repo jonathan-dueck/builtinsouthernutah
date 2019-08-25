@@ -3,6 +3,7 @@ import ReactHtmlParser from 'react-html-parser';
 import PersonDetailStyles from './person-detail.styles';
 import Button from '../../globalstyles/button';
 import { db } from '../../config/Firebase';
+import { UserContext } from '../../App';
 
 class PersonDetail extends React.Component {
 
@@ -47,10 +48,19 @@ class PersonDetail extends React.Component {
 
 				<div className="person-detail-left">
 
-					<div className="user-image">
+					<div className="user-image-box">
 						<img className="user-image" alt={displayName} src={headshotSrc} />
 					</div>
-					{/* <p>{profileVisible ? "Yes" : "No"}</p> */}
+
+
+					<UserContext.Consumer>
+						{user => {
+							if (user.id === this.props.id || user.permission >= 2) {
+								return <p>Profile is {profileVisible ? "" : " not "} publicly visible.</p>
+							}
+						}}
+					</UserContext.Consumer>
+
 
 					<div className="social-links">
 						{facebook && (

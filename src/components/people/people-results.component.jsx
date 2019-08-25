@@ -1,7 +1,7 @@
 import React from 'react';
 import { db } from '../../config/Firebase';
 
-import './people-results.styles.scss';
+import ResultStyles from './people-results.styles';
 
 import PersonCard from './person-card.component';
 
@@ -36,8 +36,10 @@ class PeopleResults extends React.Component {
 				// console.log("DOC ", doc)
 				const data = doc.data();
 				// data.id = doc.id;
-				// console.log({ data })
-				this.setState({ results: [...this.state.results, data] });
+				console.log({ data })
+				if (data.profileVisible) {
+					this.setState({ results: [...this.state.results, data] });
+				}
 			})
 		});
 	}
@@ -47,7 +49,9 @@ class PeopleResults extends React.Component {
 			return <h2>No user profiles were found.</h2>
 		} else {
 			return (
-				this.renderCards()
+				<ResultStyles>
+					{this.renderCards()}
+				</ResultStyles>
 			)
 		}
 

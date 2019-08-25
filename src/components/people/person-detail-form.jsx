@@ -6,8 +6,6 @@ import Button from '../../globalstyles/button';
 import { authLevels } from '../../utils/auth-levels';
 import { db } from '../../config/Firebase';
 
-// import { AST_IterationStatement } from 'terser';
-
 class PersonDetailForm extends React.Component {
 
 	constructor(props) {
@@ -33,6 +31,7 @@ class PersonDetailForm extends React.Component {
 		this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
 		this.fileUploadHandler = this.fileUploadHandler.bind(this);
 		this.canEditDelete = this.canEditDelete.bind(this);
+		this.setProfileVisibility = this.setProfileVisibility.bind(this);
 	}
 
 	handleChange(e) {
@@ -54,15 +53,15 @@ class PersonDetailForm extends React.Component {
 		}
 	}
 
+	setProfileVisibility() {
+		this.setState({ profileVisible: !this.props.profileVisible });
+	}
+
 	handleSubmit(e) {
 		e.preventDefault();
 		const { permission, profileVisible, displayName, title, description, headshotSrc, twitter, github, facebook, portfolio } = this.state;
 		const { id, editMode } = this.props;
-
-		console.log("permission inside handlesubmit:", permission);
-		console.log(("ID: ", id));
-		console.log("Current User: ", localStorage.getItem("BuiltInSouthernUtah"));
-
+		console.log({ displayName });
 
 		if (permission === 3 || (id === localStorage.getItem("BuiltInSouthernUtah"))) {
 			db.collection('profiles').doc(id).set({
@@ -76,17 +75,15 @@ class PersonDetailForm extends React.Component {
 				github: github || null,
 				portfolio: portfolio || null,
 				permission: permission || 0,
-				profileVisible: profileVisible || false
+				profileVisible: profileVisible
 			})
 				.then(() => {
-					console.log("Save Complete")
 					editMode(false, 3);
 				})
 				.catch((error) => {
 					console.error("Error saving document", error);
 				})
 		}
-
 	}
 
 	fileSelectedHandler(event) {
@@ -98,7 +95,7 @@ class PersonDetailForm extends React.Component {
 		console.log({ selectedFile });
 
 		if (selectedFile) {
-			console.log("At least there's a file TO upload.");
+			console.log("File has been selected.");
 			// axios.post('https://us-central1-built-in-southern-utah.cloudfunctions.net/uploadFile', selectedFile)
 			axios({
 				method: 'post',
@@ -123,7 +120,14 @@ class PersonDetailForm extends React.Component {
 		return (
 			<PersonDetailFormStyles>
 				<p className="user-auth-level">Authorization Level: <strong>{authLevels(this.props.permission)}</strong></p>
-				<p className="user-profile-visible">Profile Visible: <strong>{this.props.profileVisible ? "Yes" : "No"}</strong></p>
+				<p className="user-profile-visible">Current Profile Visibility: <strong>{this.props.profileVisible ? "Yes" : "No"}</strong></p>
+				<label htmlFor="visible">Profile visible to others? </label>
+				<input
+					type="checkbox"
+					name="visible"
+					checked={this.state.profileVisible ? true : false}
+					onChange={this.setProfileVisibility}
+				/>
 				<form>
 					<div className="user-profile-image">
 						<img alt={this.state.displayName} src={this.state.headshotSrc} />
@@ -141,7 +145,7 @@ class PersonDetailForm extends React.Component {
 							type="text"
 							name="displayName"
 							placeholder="Publicly Visible Name"
-							value={this.state.displayName}
+							value={this.state.displayName || ""}
 							onChange={this.handleChange}
 							className="form-element"
 						/>
@@ -154,7 +158,7 @@ class PersonDetailForm extends React.Component {
 							type="text"
 							name="title"
 							placeholder="Profile Title, ie: 'Front-end Dev'"
-							value={this.state.title}
+							value={this.state.title || ""}
 							onChange={this.handleChange}
 							className="form-element"
 						/>
@@ -167,7 +171,7 @@ class PersonDetailForm extends React.Component {
 							type="text"
 							name="twitter"
 							placeholder="Twitter Profile URL"
-							value={this.state.twitter}
+							value={this.state.twitter || ""}
 							onChange={this.handleChange}
 							className="form-element"
 						/>
@@ -178,7 +182,7 @@ class PersonDetailForm extends React.Component {
 							type="text"
 							name="github"
 							placeholder="GitHub URL"
-							value={this.state.github}
+							value={this.state.github || ""}
 							onChange={this.handleChange}
 							className="form-element"
 						/>
@@ -189,7 +193,7 @@ class PersonDetailForm extends React.Component {
 							type="text"
 							name="facebook"
 							placeholder="Facebook URL"
-							value={this.state.facebook}
+							value={this.state.facebook || ""}
 							onChange={this.handleChange}
 							className="form-element"
 						/>
@@ -200,7 +204,7 @@ class PersonDetailForm extends React.Component {
 							type="text"
 							name="portfolio"
 							placeholder="Your Portfolio URL"
-							value={this.state.portfolio}
+							value={this.state.portfolio || ""}
 							onChange={this.handleChange}
 							className="form-element"
 						/>
@@ -210,7 +214,7 @@ class PersonDetailForm extends React.Component {
 					<QuillStyles>
 						<ReactQuill
 							name="description"
-							value={this.state.description}
+							value={this.state.description || ""}
 							onChange={this.handleQuillChange}
 							theme="snow"
 						/>

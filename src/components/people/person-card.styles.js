@@ -2,11 +2,12 @@ import styled from 'styled-components';
 
 const PersonCardStyles = styled.div`
     width: 300px;
-    height: 400px;
+    min-height: 400px;
     background-color: #fff;
     box-shadow: 3px 3px 12px rgba(0,0,0,0.5);
     border: 1px solid black;
-    margin: 0 2rem;
+    margin: 0 2rem 3.5rem 2rem;
+
 
 a {
     text-decoration: none;
@@ -16,7 +17,7 @@ a {
 
 .user-name {
     font-size: 3rem;
-    margin: 1rem 0;
+    margin: 0rem 0;
     &:hover {
         text-decoration: underline;
     }   

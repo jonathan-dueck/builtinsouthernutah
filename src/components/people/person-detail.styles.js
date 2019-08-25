@@ -4,13 +4,22 @@ const PersonDetailStyles = styled.div`
         display: flex;   
         justify-content: space-around; 
 
+        @media(max-width: 56.25rem) {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
 
     .person-detail-left, .person-detail-right {
         display: flex;
         flex-direction: column;
     }
-    .person-detail-left {
+    .person-detail-left user-image-box {
         width: 30%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
     }
     .person-detail-right {
         width: 70%;

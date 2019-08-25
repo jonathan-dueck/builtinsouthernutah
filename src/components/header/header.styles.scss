@@ -9,6 +9,12 @@
     display: flex;
   }
   
+  h1 {
+    @media(max-width: 37.5rem) {
+      font-size: 3rem;
+    }
+  }
+
   .header-text-row {
     display: flex;
     flex-direction: column;
@@ -46,6 +52,11 @@
   
   .header p {
     font-size: 1.6rem;
+
+    @media(max-width: 37.5rem) {
+      font-size: .5rem;
+      text-align: center;
+    }
   }
   
   .nav-row {
@@ -66,7 +77,6 @@
       border-radius: 2px;
       padding: 6px;
       background-color: #527ab4;
-    
     }
   }
   
