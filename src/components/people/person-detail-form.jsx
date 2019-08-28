@@ -22,7 +22,8 @@ class PersonDetailForm extends React.Component {
 			github: this.props.github || "",
 			facebook: this.props.facebook || "",
 			portfolio: this.props.portfolio || "",
-			selectedFile: null
+			selectedFile: null,
+			selectedFilename: null
 		}
 
 		this.handleChange = this.handleChange.bind(this);
@@ -87,7 +88,7 @@ class PersonDetailForm extends React.Component {
 	}
 
 	fileSelectedHandler(event) {
-		this.setState({ selectedFile: event.target.files[0] })
+		this.setState({ selectedFile: event.target.files[0], selectedFilename: event.target.files[0].name });
 	}
 
 	fileUploadHandler() {
@@ -109,6 +110,7 @@ class PersonDetailForm extends React.Component {
 				.catch((err) => {
 					console.log("axios.post() did not succeed.")
 					console.log(err.request)
+					console.log(err);
 				});
 		} else {
 			console.log("No file stored in local component state.")
@@ -135,8 +137,9 @@ class PersonDetailForm extends React.Component {
 							<label htmlFor="file-upload" className="custom-file-upload">
 								Select profile pic
 						</label>
-							<input id="file-upload" className="button" type="file" onChange={this.fileSelectedHandler} />
+							<input id="file-upload" className="button" type="file" name="file-upload" onChange={this.fileSelectedHandler} />
 							<Button onClick={this.fileUploadHandler}>Upload</Button>
+							<div>{this.state.selectedFilename}</div>
 						</span>
 					</div>
 					<div className="form-row">

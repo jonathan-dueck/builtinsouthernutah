@@ -44,16 +44,13 @@ class PersonDetailPage extends React.Component {
 
 
 	render() {
-		const { title, displayName, headshotSrc, description, profileVisible, facebook, twitter, linkedin, github, portfolio } = this.state.person;
+		const { hasProfile, title, displayName, headshotSrc, description, profileVisible, facebook, twitter, linkedin, github, portfolio } = this.state.person;
 		const { editMode } = this.state;
 		const id = this.props.match.params.id;
 		return (
 			<Fragment>
 
-
-
-
-				{editMode ?
+				{editMode || (!hasProfile) ?
 
 					<UserContext.Consumer>
 						{user => (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import fire from '../../config/Firebase';
+import fire, { db } from '../../config/Firebase';
 import SignUpStyles from './sign-up.styles';
 
 
@@ -25,6 +25,11 @@ class SignUp extends React.Component {
     e.preventDefault();
     fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then((result) => {
+        db.collection('profiles').add({
+          // console.log("RESULT.USER.UID: ", result.user.uid);
+          id: result.user.uid,
+          hasProfile: false
+        })
         this.props.history.push('/people');
       })
       .catch((error) => {
@@ -55,7 +60,7 @@ class SignUp extends React.Component {
               type="email"
               name="email"
               placeholder="Email"
-              autocomplete="email"
+              autoComplete="email"
             />
           </div>
           <div>
@@ -65,7 +70,7 @@ class SignUp extends React.Component {
               type="password"
               name="password"
               placeholder="Your Password"
-              autocomplete="current-password"
+              autoComplete="current-password"
             />
           </div>
           <div>

@@ -16,7 +16,6 @@ const storage = new Storage({
 // const { Storage } = require('@google-cloud/storage');
 // const projectId = "built-in-southern-utah";
 
-
 exports.onFileChange = functions.storage.object().onFinalize(event => {
   console.log(event);
   const bucket = event.bucket;
@@ -46,6 +45,7 @@ exports.onFileChange = functions.storage.object().onFinalize(event => {
 });
 
 exports.uploadFile = functions.https.onRequest((req, res) => {
+  console.log("Begin uploadFile");
   cors(req, res, () => {
     res.set('Access-Control-Allow-Origin', '*'); // stack overflow suggestion
     if (req.method !== 'POST') {
@@ -54,21 +54,21 @@ exports.uploadFile = functions.https.onRequest((req, res) => {
       });
     }
     const busboy = new Busboy({ headers: req.headers });
+    console.log("Busboy defined: ", busboy);
     let uploadData = null;
 
     busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
-      console.log({ fieldname });
-      console.log({ file });
-      console.log({ encoding });
-      console.log({ mimetype });
+      console.log({ fieldname, file, filename, encoding, mimetype });
       const filepath = path.join(os.tmpdir(), filename)
       console.log({ filepath });
       uploadData = { file: filepath, type: mimetype }
+      console.log({ uploadData });
       file.pipe(fs.createWriteStream(filepath));
-      console.log({ uploadData })
     });
     busboy.on('finish', () => {
+      console.log("Finishing Begins");
       const bucket = storage.bucket('built-in-southern-utah.appspot.com')
+      console.log({ bucket });
       bucket.upload(uploadData.file, {
         uploadType: 'media',
         metadata: {
@@ -89,6 +89,6 @@ exports.uploadFile = functions.https.onRequest((req, res) => {
         })
     });
     busboy.end(req.rawBody);
+
   });
 });
-
