@@ -44,15 +44,17 @@ exports.onFileChange = functions.storage.object().onFinalize(event => {
   });
 });
 
-exports.uploadFile = functions.https.onRequest((req, res) => {
+exports.uploadFile = functions.https.onRequest(async (req, res) => {
   console.log("Begin uploadFile");
   cors(req, res, () => {
-    res.set('Access-Control-Allow-Origin', '*'); // stack overflow suggestion
+    // res.set('Access-Control-Allow-Origin', '*');
+
     if (req.method !== 'POST') {
       return res.status(500).json({
         message: 'Only POST requests are supported for profile photo upload.'
       });
     }
+    console.log({ req });
     const busboy = new Busboy({ headers: req.headers });
     console.log("Busboy defined: ", busboy);
     let uploadData = null;

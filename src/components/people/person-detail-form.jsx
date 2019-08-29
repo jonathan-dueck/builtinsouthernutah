@@ -96,12 +96,18 @@ class PersonDetailForm extends React.Component {
 		console.log({ selectedFile });
 
 		if (selectedFile) {
+			const headers = {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*'
+			}
 			console.log("File has been selected.");
 			// axios.post('https://us-central1-built-in-southern-utah.cloudfunctions.net/uploadFile', selectedFile)
 			axios({
 				method: 'post',
-				url: 'https://us-central1-built-in-southern-utah.cloudfunctions.net/uploadFile',
-				data: selectedFile
+				url: 'https://us-central1-built-in-southern-utah.cloudfunctions.net/uploadFile/',
+				data: selectedFile,
+				headers
+
 			})
 				.then((response) => {
 					console.log("I think it effing worked...");
@@ -109,8 +115,6 @@ class PersonDetailForm extends React.Component {
 				})
 				.catch((err) => {
 					console.log("axios.post() did not succeed.")
-					console.log(err.request)
-					console.log(err);
 				});
 		} else {
 			console.log("No file stored in local component state.")
@@ -130,7 +134,7 @@ class PersonDetailForm extends React.Component {
 					checked={this.state.profileVisible ? true : false}
 					onChange={this.setProfileVisibility}
 				/>
-				<form>
+				<form encType="multipart/form-data">
 					<div className="user-profile-image">
 						<img alt={this.state.displayName} src={this.state.headshotSrc} />
 						<span className="upload-buttons">
