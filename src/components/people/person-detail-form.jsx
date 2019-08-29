@@ -23,7 +23,8 @@ class PersonDetailForm extends React.Component {
 			facebook: this.props.facebook || "",
 			portfolio: this.props.portfolio || "",
 			selectedFile: null,
-			selectedFilename: null
+			selectedFilename: null,
+			hasProfile: this.props.hasProfile
 		}
 
 		this.handleChange = this.handleChange.bind(this);
@@ -76,9 +77,11 @@ class PersonDetailForm extends React.Component {
 				github: github || null,
 				portfolio: portfolio || null,
 				permission: permission || 0,
-				profileVisible: profileVisible
+				profileVisible: profileVisible,
+				hasProfile: true
 			})
 				.then(() => {
+					console.log("Refetch here!");
 					editMode(false, 3);
 				})
 				.catch((error) => {

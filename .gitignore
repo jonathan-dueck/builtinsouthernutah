@@ -23,3 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 /functions/built-in-southern-utah-firebase-adminsdk-rplsy-85bda1974f.json
+.firebase/
