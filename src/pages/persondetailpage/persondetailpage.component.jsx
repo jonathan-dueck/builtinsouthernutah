@@ -19,6 +19,7 @@ class PersonDetailPage extends React.Component {
 			isLoading: false
 		}
 		this.toggleState = this.toggleState.bind(this);
+		this.refetchProfile = this.refetchProfile.bind(this);
 	}
 
 	componentDidMount() {
@@ -44,6 +45,18 @@ class PersonDetailPage extends React.Component {
 			console.log("Must be admin or own this profile, in order to edit it.");
 			this.setState({ editMode: false })
 		}
+	}
+
+	refetchProfile(id) {
+		this.setState({ loading: true });
+		db.collection('profiles').where("id", "==", this.props.match.params.id)
+			.get()
+			.then((querySnapshot) => {
+				querySnapshot.forEach((doc) => {
+					doc.data()
+					this.setState({ person: doc.data(), isLoading: false });
+				})
+			})
 	}
 
 	render() {
@@ -72,6 +85,7 @@ class PersonDetailPage extends React.Component {
 								linkedin={linkedin}
 								github={github}
 								portfolio={portfolio}
+								refetchProfile={this.refetchProfile}
 							/>
 						)}
 					</UserContext.Consumer>

@@ -62,7 +62,7 @@ class PersonDetailForm extends React.Component {
 	handleSubmit(e) {
 		e.preventDefault();
 		const { permission, profileVisible, displayName, title, description, headshotSrc, twitter, github, facebook, portfolio } = this.state;
-		const { id, editMode } = this.props;
+		const { id, editMode, refetchProfile } = this.props;
 
 		if (permission === 3 || (id === localStorage.getItem("BuiltInSouthernUtah"))) {
 			db.collection('profiles').doc(id).set({
@@ -81,6 +81,7 @@ class PersonDetailForm extends React.Component {
 			})
 				.then(() => {
 					console.log("Refetch here!");
+					refetchProfile(id)
 					editMode(false, 3);
 				})
 				.catch((error) => {
