@@ -26,7 +26,6 @@ class SignUp extends React.Component {
     fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then((result) => {
         db.collection('profiles').add({
-          // console.log("RESULT.USER.UID: ", result.user.uid);
           id: result.user.uid,
           hasProfile: false
         })

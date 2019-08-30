@@ -63,7 +63,6 @@ class PersonDetailForm extends React.Component {
 		e.preventDefault();
 		const { permission, profileVisible, displayName, title, description, headshotSrc, twitter, github, facebook, portfolio } = this.state;
 		const { id, editMode } = this.props;
-		console.log({ displayName });
 
 		if (permission === 3 || (id === localStorage.getItem("BuiltInSouthernUtah"))) {
 			db.collection('profiles').doc(id).set({

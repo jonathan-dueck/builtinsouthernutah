@@ -13,7 +13,8 @@ class PeopleResults extends React.Component {
 		this.renderCards = this.renderCards.bind(this);
 
 		this.state = {
-			results: []
+			results: [],
+			isLoading: false
 		}
 	}
 
@@ -31,20 +32,21 @@ class PeopleResults extends React.Component {
 	}
 
 	componentDidMount() {
+		this.setState({ isLoading: true });
 		db.collection('profiles').get().then((snapshot) => {
 			snapshot.docs.forEach(doc => {
-				// console.log("DOC ", doc)
 				const data = doc.data();
 				// data.id = doc.id;
-				console.log({ data })
 				if (data.profileVisible) {
 					this.setState({ results: [...this.state.results, data] });
 				}
+				this.setState({ isLoading: false })
 			})
 		});
 	}
 
 	render() {
+		if (this.state.isLoading) return <div>Loading</div>
 		if (this.state.results.length === 0) {
 			return <h2>No user profiles were found.</h2>
 		} else {

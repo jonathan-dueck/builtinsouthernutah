@@ -13,19 +13,21 @@ class PersonDetailPage extends React.Component {
 
 		this.state = {
 			editMode: false,
-			person: {}
+			person: {},
+			isLoading: false
 		}
 		this.toggleState = this.toggleState.bind(this);
 	}
 
 	componentDidMount() {
 		// Fetch this user from the backend, getting user id from address bar
+		this.setState({ isLoading: true })
 		db.collection('profiles').where("id", "==", this.props.match.params.id)
 			.get()
 			.then((querySnapshot) => {
 				querySnapshot.forEach((doc) => {
 					doc.data()
-					this.setState({ person: doc.data() });
+					this.setState({ person: doc.data(), isLoading: false });
 				})
 			})
 	}
@@ -43,6 +45,7 @@ class PersonDetailPage extends React.Component {
 	}
 
 	render() {
+		if (this.state.isLoading === true) return <div>Loading!!!</div>
 		const { hasProfile, title, displayName, headshotSrc, description, profileVisible, facebook, twitter, linkedin, github, portfolio } = this.state.person;
 		const { editMode } = this.state;
 		const id = this.props.match.params.id;
