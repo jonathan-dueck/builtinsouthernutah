@@ -5,6 +5,8 @@ import PersonDetail from '../../components/people/person-detail.component';
 import { UserContext } from '../../App';
 
 import { db } from '../../config/Firebase';
+import Loader from '../../components/loader/loader.component';
+
 
 class PersonDetailPage extends React.Component {
 
@@ -45,7 +47,7 @@ class PersonDetailPage extends React.Component {
 	}
 
 	render() {
-		if (this.state.isLoading === true) return <div>Loading!!!</div>
+		if (this.state.isLoading === true) return <Loader />
 		const { hasProfile, title, displayName, headshotSrc, description, profileVisible, facebook, twitter, linkedin, github, portfolio } = this.state.person;
 		const { editMode } = this.state;
 		const id = this.props.match.params.id;

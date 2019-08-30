@@ -1,9 +1,9 @@
 import React from 'react';
 import { db } from '../../config/Firebase';
+import PersonCard from './person-card.component';
 
 import ResultStyles from './people-results.styles';
-
-import PersonCard from './person-card.component';
+import Loader from '../loader/loader.component';
 
 class PeopleResults extends React.Component {
 
@@ -46,7 +46,7 @@ class PeopleResults extends React.Component {
 	}
 
 	render() {
-		if (this.state.isLoading) return <div>Loading</div>
+		if (this.state.isLoading) return <Loader />
 		if (this.state.results.length === 0) {
 			return <h2>No user profiles were found.</h2>
 		} else {
