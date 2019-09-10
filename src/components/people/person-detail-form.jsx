@@ -101,7 +101,7 @@ class PersonDetailForm extends React.Component {
 		if (selectedFile) {
 			const headers = {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': '*'
+				'Access-Control-Allow-Origin': 'https://builtinsouthernutah.com'
 			}
 			console.log("File has been selected.");
 			// axios.post('https://us-central1-built-in-southern-utah.cloudfunctions.net/uploadFile', selectedFile)

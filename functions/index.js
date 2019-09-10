@@ -47,7 +47,7 @@ exports.onFileChange = functions.storage.object().onFinalize(event => {
 exports.uploadFile = functions.https.onRequest(async (req, res) => {
   console.log("Begin uploadFile");
   cors(req, res, () => {
-    // res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Origin', 'https://builtinsouthernutah.com');
 
     if (req.method !== 'POST') {
       return res.status(500).json({

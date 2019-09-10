@@ -31,8 +31,6 @@ class Header extends React.Component {
 					</div>
 				</div>
 				<div className="nav-row">
-					{console.log(currentUser.uid)}
-					{console.log(this.props.location.pathname.replace("/people/", ""))}
 					<a href="/people" className={`button ${(this.props.location.pathname === '/' || this.props.location.pathname === '/people') ? 'active' : ''}`}>People</a>
 
 					{
