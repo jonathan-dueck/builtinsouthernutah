@@ -70,6 +70,7 @@ const PersonDetailFormStyles = styled.div`
 
     .upload-buttons {
         display: flex;
+        justify-content: space-between;
         align-items: center;
         margin-left: 50px;
     }
