@@ -6,6 +6,10 @@ const AboutStyles = styled.div`
     border-radius: 10px;
     margin: 0 auto;
     padding: 2rem;
+
+    @media(max-width: 37.5rem) {
+      border: none;
+    }
         
     h1 {
 			font-size: 3.5rem;        

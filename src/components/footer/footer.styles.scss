@@ -1,5 +1,7 @@
 
 .footer {
+    display: flex;
+    flex-direction: column;
     background-color: #012c6a;
     color: #fffff2;
     border-top: 2px solid #ffc323;

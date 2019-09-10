@@ -4,9 +4,9 @@ const Button = styled.div`
   background-color: #527ab4;
   border-radius: 2px;
   color: #fff;
-	padding: 8px;
+  padding: 1rem;
 	max-width: 150px;
-	margin: 1rem auto;
+	margin: 1rem 0;
 	font-size: 2rem;
 	transition: 0.3s;
 

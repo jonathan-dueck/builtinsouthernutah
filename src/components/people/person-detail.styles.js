@@ -38,12 +38,14 @@ const PersonDetailStyles = styled.div`
     .edit-profile {
         cursor: pointer;
         margin-right: 1rem;
+        padding: 1rem;
     }
 
     .delete-profile {
         cursor: pointer;
         margin-left: 1rem;
         margin-right: 0;
+        padding: 1rem;
     }
 
     .user-name {
@@ -56,7 +58,11 @@ const PersonDetailStyles = styled.div`
         font-size: 2rem;
         padding: 20px 70px;
         margin: 0 auto;
-        text-align: left;
+				text-align: left;
+				
+				@media(max-width: 37.5rem) {
+					padding: 0;
+				}
     }
     .social-links {
         display: flex;

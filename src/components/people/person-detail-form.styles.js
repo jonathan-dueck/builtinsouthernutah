@@ -46,6 +46,7 @@ const PersonDetailFormStyles = styled.div`
 
     .button-row {
         display: flex;
+        justify-content: space-around;
     }
 
     input[type="file"] {

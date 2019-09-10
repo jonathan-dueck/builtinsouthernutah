@@ -25,18 +25,19 @@ class Header extends React.Component {
 						<img className="logo" alt="Built in Southern Utah" src="/images/logo.png" />
 						<div className="header-text-row">
 							<h1>Built in Southern Utah</h1>
-							<p>Dedicated to energizing the Southern Utah technology community </p>
+							<p className="subheadline"><span>Dedicated to energizing the</span> <span>Southern Utah technology community</span> </p>
 						</div>
 
 					</div>
 				</div>
 				<div className="nav-row">
-
-					<a href="/people" className={`button ${(this.props.location.pathname === '/' || this.props.location.pathname.includes('/people')) ? 'active' : ''}`}>People</a>
+					{console.log(currentUser.uid)}
+					{console.log(this.props.location.pathname.replace("/people/", ""))}
+					<a href="/people" className={`button ${(this.props.location.pathname === '/' || this.props.location.pathname === '/people') ? 'active' : ''}`}>People</a>
 
 					{
 						currentUser && (
-							<a href={`/people/${currentUser.uid}`} className={`button ${(this.props.location.pathname.includes('/profile')) ? 'active' : ''}`}>Your Profile</a>
+							<a href={`/people/${currentUser.uid}`} className={`button ${(currentUser.uid === this.props.location.pathname.replace("/people/", "")) ? 'active' : ''}`}>Your Profile</a>
 						)
 					}
 
