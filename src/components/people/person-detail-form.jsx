@@ -128,8 +128,7 @@ class PersonDetailForm extends React.Component {
 		const { editMode } = this.props;
 		return (
 			<PersonDetailFormStyles>
-				<p className="user-auth-level">Authorization Level: <strong>{authLevels(this.props.permission)}</strong></p>
-				<p className="user-profile-visible">Current Profile Visibility: <strong>{this.props.profileVisible ? "Yes" : "No"}</strong></p>
+				<p className="user-profile-visible">Your profile is currently <strong>{this.props.profileVisible ? "visible." : "invisible."}</strong></p>
 				<label htmlFor="visible">Profile visible to others? </label>
 				<input
 					type="checkbox"

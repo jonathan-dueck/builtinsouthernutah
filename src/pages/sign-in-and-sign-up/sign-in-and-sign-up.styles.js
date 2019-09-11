@@ -19,6 +19,7 @@ const SignInUpStyles = styled.div`
 
 .third-party-auth-row {
     display: flex;
+    justify-content: space-around;
     max-width: 600px;
     margin: 0 auto;
 }

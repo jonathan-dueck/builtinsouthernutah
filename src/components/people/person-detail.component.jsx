@@ -29,7 +29,14 @@ class PersonDetail extends React.Component {
 		const profileIdWeAreVisiting = id;
 
 		if (id && (loggedInUser === profileIdWeAreVisiting)) {
-			db.collection('profiles').doc(id).delete().then(() => {
+			db.collection('profiles').doc(id).delete().then((result) => {
+				console.log("RESULT after delete: ", result);
+				db.collection('profiles').doc(result.user.uid).set({
+					id: result.user.uid,
+					hasProfile: false,
+					profileVisible: false
+				})
+				this.props.history.push('/people');
 				console.log("Profile has been deleted.");
 			})
 				.catch((err) => {

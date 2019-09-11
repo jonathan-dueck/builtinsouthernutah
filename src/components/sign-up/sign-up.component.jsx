@@ -13,7 +13,6 @@ class SignUp extends React.Component {
     this.state = {
       email: '',
       password: '',
-      displayName: ''
     }
   }
 
@@ -25,9 +24,11 @@ class SignUp extends React.Component {
     e.preventDefault();
     fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then((result) => {
-        db.collection('profiles').add({
+        console.log({ result });
+        db.collection('profiles').doc(result.user.uid).set({
           id: result.user.uid,
-          hasProfile: false
+          hasProfile: false,
+          profileVisible: false
         })
         this.props.history.push('/people');
       })
@@ -42,16 +43,6 @@ class SignUp extends React.Component {
         <h1>Brand New Here?</h1>
         <p> You don't need to create an account unless you're submitting new content to the site</p>
         <form>
-          <div>
-            <input
-              value={this.state.displayName}
-              onChange={this.handleChange}
-              type="text"
-              name="displayName"
-              placeholder="Your Name"
-              autoComplete="name"
-            />
-          </div>
           <div>
             <input
               value={this.state.email}
