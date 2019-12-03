@@ -6,6 +6,7 @@ const cors = require('cors')({ origin: true });
 const Busboy = require('busboy');
 const fs = require('fs');
 
+
 const { Storage } = require('@google-cloud/storage');
 const storage = new Storage({
   projectId: 'built-in-southern-utah',
@@ -44,54 +45,57 @@ exports.onFileChange = functions.storage.object().onFinalize(event => {
   });
 });
 
+
+
 exports.uploadFile = functions.https.onRequest(async (req, res) => {
-  app.use(cors);
-  console.log("Begin uploadFile");
-  cors(req, res, () => {
-    res.set('Access-Control-Allow-Origin', 'https://builtinsouthernutah.com');
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', 'POST, PUT');
+    res.header('Acces-Control-Allow-Origin', '*');
+  }
+  cors(req, res);
 
-    if (req.method !== 'POST') {
-      return res.status(500).json({
-        message: 'Only POST requests are supported for profile photo upload.'
-      });
-    }
-    console.log({ req });
-    const busboy = new Busboy({ headers: req.headers });
-    console.log("Busboy defined: ", busboy);
-    let uploadData = null;
-
-    busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
-      console.log({ fieldname, file, filename, encoding, mimetype });
-      const filepath = path.join(os.tmpdir(), filename)
-      console.log({ filepath });
-      uploadData = { file: filepath, type: mimetype }
-      console.log({ uploadData });
-      file.pipe(fs.createWriteStream(filepath));
+  if (req.method !== 'POST') {
+    return res.status(500).json({
+      message: 'Only POST requests are supported for profile photo upload.'
     });
-    busboy.on('finish', () => {
-      console.log("Finishing Begins");
-      const bucket = storage.bucket('built-in-southern-utah.appspot.com')
-      console.log({ bucket });
-      bucket.upload(uploadData.file, {
-        uploadType: 'media',
-        metadata: {
-          metadata: {
-            contentType: uploadData.type
-          }
-        }
-      })
-        .then(() => {
-          return res.status(200).json({
-            message: 'It worked!'
-          });
-        })
-        .catch(err => {
-          return res.status(500).json({
-            error: err
-          });
-        })
-    });
-    busboy.end(req.rawBody);
+  }
 
+  console.log({ req });
+  const busboy = new Busboy({ headers: req.headers });
+  console.log("Busboy defined: ", busboy);
+  let uploadData = null;
+
+  busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
+    console.log({ fieldname, file, filename, encoding, mimetype });
+    const filepath = path.join(os.tmpdir(), filename)
+    console.log({ filepath });
+    uploadData = { file: filepath, type: mimetype }
+    console.log({ uploadData });
+    file.pipe(fs.createWriteStream(filepath));
   });
+  busboy.on('finish', () => {
+    console.log("Finishing Begins");
+    const bucket = storage.bucket('built-in-southern-utah.appspot.com')
+    console.log({ bucket });
+    bucket.upload(uploadData.file, {
+      uploadType: 'media',
+      metadata: {
+        metadata: {
+          contentType: uploadData.type
+        }
+      }
+    })
+      .then(() => {
+        return res.status(200).json({
+          message: 'It worked!'
+        });
+      })
+      .catch(err => {
+        return res.status(500).json({
+          error: err
+        });
+      })
+  });
+  busboy.end(req.rawBody);
+
 });

@@ -5,6 +5,7 @@ import { PersonDetailFormStyles, QuillStyles } from './person-detail-form.styles
 import Button from '../../globalstyles/button';
 import { authLevels } from '../../utils/auth-levels';
 import { db } from '../../config/Firebase';
+import { withRouter } from 'react-router-dom';
 
 class PersonDetailForm extends React.Component {
 
@@ -56,7 +57,11 @@ class PersonDetailForm extends React.Component {
 	}
 
 	setProfileVisibility() {
-		this.setState({ profileVisible: !this.props.profileVisible });
+		if (this.state.profileVisible === true) {
+			this.setState({ profileVisible: false })
+		} else {
+			this.setState({ profileVisible: true })
+		}
 	}
 
 	handleSubmit(e) {
@@ -101,7 +106,6 @@ class PersonDetailForm extends React.Component {
 		if (selectedFile) {
 			const headers = {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': 'https://builtinsouthernutah.com'
 			}
 			console.log("File has been selected.");
 			// axios.post('https://us-central1-built-in-southern-utah.cloudfunctions.net/uploadFile', selectedFile)
@@ -233,7 +237,7 @@ class PersonDetailForm extends React.Component {
 				</form>
 				<div className="button-row">
 					<Button onClick={this.handleSubmit}>Save</Button>
-					<Button onClick={() => editMode(false)}>Cancel</Button>
+					<Button onClick={() => this.props.history.push("/")}>Cancel</Button>
 				</div>
 
 			</PersonDetailFormStyles>
@@ -241,4 +245,4 @@ class PersonDetailForm extends React.Component {
 	}
 }
 
-export default PersonDetailForm;
+export default withRouter(PersonDetailForm);

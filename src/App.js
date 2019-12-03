@@ -8,6 +8,7 @@ import CompaniesPage from './pages/companiespage/companiespage.component';
 import ProjectsPage from './pages/projectspage/projectspage.component';
 import EventsPage from './pages/eventspage/eventspage.component';
 import PersonDetailPage from './pages/persondetailpage/persondetailpage.component';
+import PersonEditPage from './pages/personeditpage/personeditpage.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 
 import { Route, Switch, Redirect } from 'react-router-dom';
@@ -74,6 +75,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path='/people' component={HomePage} />
             <Route exact path='/people/:id' component={PersonDetailPage} />
+            <Route exact path='/people/:id/edit' component={PersonEditPage} />
             <Route exact path='/events' component={EventsPage} />
             <Route exact path='/companies' component={CompaniesPage} />
             <Route exact path='/projects' component={ProjectsPage} />

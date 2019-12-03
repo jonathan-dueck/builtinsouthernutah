@@ -4,6 +4,8 @@ import PersonDetailStyles from './person-detail.styles';
 import Button from '../../globalstyles/button';
 import { db } from '../../config/Firebase';
 import { UserContext } from '../../App';
+import { withRouter } from 'react-router-dom';
+
 
 class PersonDetail extends React.Component {
 
@@ -34,7 +36,8 @@ class PersonDetail extends React.Component {
 				db.collection('profiles').doc(result.user.uid).set({
 					id: result.user.uid,
 					hasProfile: false,
-					profileVisible: false
+					profileVisible: false,
+					headshotSrc: '/images/person-silhouette.png'
 				})
 				this.props.history.push('/people');
 				console.log("Profile has been deleted.");
@@ -126,7 +129,8 @@ class PersonDetail extends React.Component {
 
 								<Button
 									className="edit-profile"
-									onClick={() => editMode(true, this.props.permission)}
+									// onClick={() => console.log(this.props.history.location.pathname)}
+									onClick={() => this.props.history.push(`${this.props.history.location.pathname}/edit`)}
 								>
 									Edit Profile
 					</Button>
@@ -157,4 +161,4 @@ class PersonDetail extends React.Component {
 	}
 }
 
-export default PersonDetail;
+export default withRouter(PersonDetail);
