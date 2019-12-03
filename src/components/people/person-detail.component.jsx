@@ -51,7 +51,7 @@ class PersonDetail extends React.Component {
 	}
 
 	render() {
-		const { displayName, title, editMode, headshotSrc, description, profileVisible, facebook, twitter, linkedin, github, portfolio } = this.props;
+		const { displayName, title, headshotSrc, description, profileVisible, facebook, twitter, linkedin, github, portfolio } = this.props;
 
 		return (
 			<PersonDetailStyles>

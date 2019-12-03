@@ -3,7 +3,7 @@ import axios from 'axios';
 import ReactQuill from 'react-quill';
 import { PersonDetailFormStyles, QuillStyles } from './person-detail-form.styles';
 import Button from '../../globalstyles/button';
-import { authLevels } from '../../utils/auth-levels';
+// import { authLevels } from '../../utils/auth-levels';
 import { db } from '../../config/Firebase';
 import { withRouter } from 'react-router-dom';
 
@@ -67,7 +67,7 @@ class PersonDetailForm extends React.Component {
 	handleSubmit(e) {
 		e.preventDefault();
 		const { permission, profileVisible, displayName, title, description, headshotSrc, twitter, github, facebook, portfolio } = this.state;
-		const { id, editMode, refetchProfile } = this.props;
+		const { id } = this.props;
 
 		if (permission === 3 || (id === localStorage.getItem("BuiltInSouthernUtah"))) {
 			db.collection('profiles').doc(id).set({
@@ -85,9 +85,8 @@ class PersonDetailForm extends React.Component {
 				hasProfile: true
 			})
 				.then(() => {
-					console.log("Refetch here!");
-					refetchProfile(id)
-					editMode(false, 3);
+					// refetchProfile(id)
+					this.props.history.push('/');
 				})
 				.catch((error) => {
 					console.error("Error saving document", error);
@@ -129,7 +128,6 @@ class PersonDetailForm extends React.Component {
 	}
 
 	render() {
-		const { editMode } = this.props;
 		return (
 			<PersonDetailFormStyles>
 				<p className="user-profile-visible">Your profile is currently <strong>{this.props.profileVisible ? "visible." : "invisible."}</strong></p>
