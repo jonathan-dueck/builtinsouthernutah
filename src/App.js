@@ -10,6 +10,7 @@ import EventsPage from './pages/eventspage/eventspage.component';
 import PersonDetailPage from './pages/persondetailpage/persondetailpage.component';
 import PersonEditPage from './pages/personeditpage/personeditpage.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import PrivacyPolicy from './pages/privacy-policy/privacy-policy.component';
 
 import { Route, Switch, Redirect } from 'react-router-dom';
 import fire, { db } from './config/Firebase';
@@ -81,6 +82,7 @@ class App extends React.Component {
             <Route exact path='/projects' component={ProjectsPage} />
             <Route exact path='/about' component={AboutPage} />
             <Route exact path='/signup' render={() => (this.state.user && !this.state.user.length === 0) ? (<Redirect to='/people' />) : (<SignInAndSignUp />)} />
+            <Route exact path='/privacy-policy' component={PrivacyPolicy} />
             <Route exact path='/' component={HomePage} />
           </Switch>
 
