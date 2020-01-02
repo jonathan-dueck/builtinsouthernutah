@@ -30,6 +30,10 @@ function PersonDetailForm(props) {
 	// TODO: setProfileVisibility()
 	// TODO: fileUploadHandler()
 
+	const handleCheckboxChange = event => {
+		console.log(event)
+	}
+
 	const fileSelectedHandler = event => {
 		setSelectedFile(event.target.files[0]);
 		setSelectedFilename(event.target.files[0].name)
@@ -75,7 +79,8 @@ function PersonDetailForm(props) {
 				type="checkbox"
 				name="visible"
 				checked={profileVisible ? true : false}
-				onChange={e => setProfileVisible(e.target.value)}
+				onChange={e => { profileVisible ? setProfileVisible(false) : setProfileVisible(true) }}
+
 			/>
 
 			<form encType="multipart/form-data">
