@@ -1,73 +1,43 @@
-import React from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import { PersonDetailFormStyles, QuillStyles } from './person-detail-form.styles';
 import Button from '../../globalstyles/button';
-// import { authLevels } from '../../utils/auth-levels';
 import { db } from '../../config/Firebase';
 import { withRouter } from 'react-router-dom';
+// import axios from 'axios';
+// import { authLevels } from '../../utils/auth-levels';
 
-class PersonDetailForm extends React.Component {
+function PersonDetailForm(props) {
 
-	constructor(props) {
-		super(props);
 
-		this.state = {
-			permission: this.props.permission,
-			profileVisible: this.props.profileVisible,
-			displayName: this.props.displayName,
-			title: this.props.title,
-			description: this.props.description,
-			headshotSrc: this.props.headshotSrc,
-			twitter: this.props.twitter || "",
-			github: this.props.github || "",
-			facebook: this.props.facebook || "",
-			portfolio: this.props.portfolio || "",
-			selectedFile: null,
-			selectedFilename: null,
-			hasProfile: this.props.hasProfile
-		}
+	const [permission, setPermission] = useState(props.permission)
+	const [profileVisible, setProfileVisible] = useState(props.profileVisible)
+	const [displayName, setDisplayName] = useState(props.displayName)
+	const [title, setTitle] = useState(props.title)
+	const [description, setDescription] = useState(props.description)
+	const [headshotSrc, setHeadshotSrc] = useState(props.headshotSrc)
+	const [facebook, setFacebook] = useState(props.facebook || "")
+	const [twitter, setTwitter] = useState(props.twitter || "")
+	const [github, setGithub] = useState(props.github || "")
+	const [portfolio, setPortfolio] = useState(props.portfolio || "")
+	const [selectedFile, setSelectedFile] = useState(null)
+	const [selectedFilename, setSelectedFilename] = useState(null)
+	const [hasProfile, setHasProfile] = useState(props.hasProfile)
 
-		this.handleChange = this.handleChange.bind(this);
-		this.handleQuillChange = this.handleQuillChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-		this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
-		this.fileUploadHandler = this.fileUploadHandler.bind(this);
-		this.canEditDelete = this.canEditDelete.bind(this);
-		this.setProfileVisibility = this.setProfileVisibility.bind(this);
+	// Define Methods
+
+	// TODO: canEditDelete()
+	// TODO: setProfileVisibility()
+	// TODO: fileUploadHandler()
+
+	const fileSelectedHandler = event => {
+		setSelectedFile(event.target.files[0]);
+		setSelectedFilename(event.target.files[0].name)
 	}
 
-	handleChange(e) {
-		this.setState({
-			[e.target.name]: e.target.value
-		});
-	}
-
-	handleQuillChange(value) {
-		this.setState({ description: value })
-	}
-
-	canEditDelete(profileId, permission) {
-		const userId = localStorage.getItem("BuiltInSouthernUtah");
-		if (permission === 3 || profileId === userId) {
-			return true
-		} else {
-			return false
-		}
-	}
-
-	setProfileVisibility() {
-		if (this.state.profileVisible === true) {
-			this.setState({ profileVisible: false })
-		} else {
-			this.setState({ profileVisible: true })
-		}
-	}
-
-	handleSubmit(e) {
+	const { id } = props;
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		const { permission, profileVisible, displayName, title, description, headshotSrc, twitter, github, facebook, portfolio } = this.state;
-		const { id } = this.props;
 
 		if (permission === 3 || (id === localStorage.getItem("BuiltInSouthernUtah"))) {
 			db.collection('profiles').doc(id).set({
@@ -86,7 +56,7 @@ class PersonDetailForm extends React.Component {
 			})
 				.then(() => {
 					// refetchProfile(id)
-					this.props.history.push('/');
+					props.history.push('/');
 				})
 				.catch((error) => {
 					console.error("Error saving document", error);
@@ -94,153 +64,170 @@ class PersonDetailForm extends React.Component {
 		}
 	}
 
-	fileSelectedHandler(event) {
-		this.setState({ selectedFile: event.target.files[0], selectedFilename: event.target.files[0].name });
-	}
+	// TODO: Define useEffect (uploading photo to firebase)
 
-	fileUploadHandler() {
-		const { selectedFile } = this.state;
-		console.log({ selectedFile });
+	return (
+		<PersonDetailFormStyles>
+			<p className="user-profile-visible">Your profile is currently <strong>{props.profileVisible ? "visible." : "invisible."}</strong></p>
 
-		if (selectedFile) {
-			const headers = {
-				'Content-Type': 'application/json',
-			}
-			console.log("File has been selected.");
-			// axios.post('https://us-central1-built-in-southern-utah.cloudfunctions.net/uploadFile', selectedFile)
-			axios({
-				method: 'post',
-				url: 'https://us-central1-built-in-southern-utah.cloudfunctions.net/uploadFile/',
-				data: selectedFile,
-				headers
+			<label htmlFor="visible">Profile visible to others? </label>
+			<input
+				type="checkbox"
+				name="visible"
+				checked={profileVisible ? true : false}
+				onChange={e => setProfileVisible(e.target.value)}
+			/>
 
-			})
-				.then((response) => {
-					console.log("I think it effing worked...");
-					console.log(response)
-				})
-				.catch((err) => {
-					console.log("axios.post() did not succeed.")
-				});
-		} else {
-			console.log("No file stored in local component state.")
-		}
-	}
-
-	render() {
-		return (
-			<PersonDetailFormStyles>
-				<p className="user-profile-visible">Your profile is currently <strong>{this.props.profileVisible ? "visible." : "invisible."}</strong></p>
-				<label htmlFor="visible">Profile visible to others? </label>
-				<input
-					type="checkbox"
-					name="visible"
-					checked={this.state.profileVisible ? true : false}
-					onChange={this.setProfileVisibility}
-				/>
-				<form encType="multipart/form-data">
-					<div className="user-profile-image">
-						<img alt={this.state.displayName} src={this.state.headshotSrc} />
-						<span className="upload-buttons">
-							<label htmlFor="file-upload" className="custom-file-upload">
-								Select profile pic
-						</label>
-							<input id="file-upload" className="button" type="file" name="file-upload" onChange={this.fileSelectedHandler} />
-							<Button onClick={this.fileUploadHandler}>Upload</Button>
-							<div>{this.state.selectedFilename}</div>
-						</span>
-					</div>
-					<div className="form-row">
-						<span className="form-label">Name</span>
-						<input
-							type="text"
-							name="displayName"
-							placeholder="Publicly Visible Name"
-							value={this.state.displayName || ""}
-							onChange={this.handleChange}
-							className="form-element"
-						/>
-						<span className="form-required">*</span>
-					</div>
-
-					<div className="form-row">
-						<span className="form-label">Title</span>
-						<input
-							type="text"
-							name="title"
-							placeholder="Profile Title, ie: 'Front-end Dev'"
-							value={this.state.title || ""}
-							onChange={this.handleChange}
-							className="form-element"
-						/>
-						<span className="form-required">*</span>
-					</div>
-
-					<div className="form-row">
-						<span><img className="form-label-img" src="../images/twitter-icon.png" alt="Twitter" /></span>
-						<input
-							type="text"
-							name="twitter"
-							placeholder="Twitter Profile URL"
-							value={this.state.twitter || ""}
-							onChange={this.handleChange}
-							className="form-element"
-						/>
-					</div>
-					<div className="form-row">
-						<span><img className="form-label-img" src="../images/github-icon.png" alt="Github" /></span>
-						<input
-							type="text"
-							name="github"
-							placeholder="GitHub URL"
-							value={this.state.github || ""}
-							onChange={this.handleChange}
-							className="form-element"
-						/>
-					</div>
-					<div className="form-row">
-						<span><img className="form-label-img" src="../images/facebook-icon.png" alt="Facebook" /></span>
-						<input
-							type="text"
-							name="facebook"
-							placeholder="Facebook URL"
-							value={this.state.facebook || ""}
-							onChange={this.handleChange}
-							className="form-element"
-						/>
-					</div>
-					<div className="form-row">
-						<span><img className="form-label-img" src="../images/www-icon.png" alt="Portfolio" /></span>
-						<input
-							type="text"
-							name="portfolio"
-							placeholder="Your Portfolio URL"
-							value={this.state.portfolio || ""}
-							onChange={this.handleChange}
-							className="form-element"
-						/>
-					</div>
-					<label htmlFor="description">Tell the world about yourself!</label>
-
-					<QuillStyles>
-						<ReactQuill
-							name="description"
-							value={this.state.description || ""}
-							onChange={this.handleQuillChange}
-							theme="snow"
-						/>
-					</QuillStyles>
-
-
-				</form>
-				<div className="button-row">
-					<Button onClick={this.handleSubmit}>Save</Button>
-					<Button onClick={() => this.props.history.push("/")}>Cancel</Button>
+			<form encType="multipart/form-data">
+				<div className="user-profile-image">
+					<img alt={displayName} src={headshotSrc} />
+					<span className="upload-buttons">
+						<label htmlFor="file-upload" className="custom-file-upload">
+							Select profile pic
+ 						</label>
+						<input id="file-upload" className="button" type="file" name="file-upload" onChange={setSelectedFilename} />
+						<Button>Upload</Button>
+						<div>{selectedFilename}</div>
+					</span>
+				</div>
+				<div className="form-row">
+					<span className="form-label">Name</span>
+					<input
+						type="text"
+						name="displayName"
+						placeholder="Publicly Visible Name"
+						value={displayName || ""}
+						onChange={e => setDisplayName(e.target.value)}
+						className="form-element"
+					/>
+					<span className="form-required">*</span>
 				</div>
 
-			</PersonDetailFormStyles>
-		)
-	}
+				<div className="form-row">
+					<span className="form-label">Title</span>
+					<input
+						type="text"
+						name="title"
+						placeholder="Profile Title, ie: 'Front-end Dev'"
+						value={title || ""}
+						onChange={e => setTitle(e.target.value)}
+						className="form-element"
+					/>
+					<span className="form-required">*</span>
+				</div>
+
+				<div className="form-row">
+					<span><img className="form-label-img" src="../images/twitter-icon.png" alt="Twitter" /></span>
+					<input
+						type="text"
+						name="twitter"
+						placeholder="Twitter Profile URL"
+						value={twitter || ""}
+						onChange={e => setTwitter(e.target.value)}
+						className="form-element"
+					/>
+				</div>
+				<div className="form-row">
+					<span><img className="form-label-img" src="../images/github-icon.png" alt="Github" /></span>
+					<input
+						type="text"
+						name="github"
+						placeholder="GitHub URL"
+						value={github || ""}
+						onChange={e => setGithub(e.target.value)}
+						className="form-element"
+					/>
+				</div>
+				<div className="form-row">
+					<span><img className="form-label-img" src="../images/facebook-icon.png" alt="Facebook" /></span>
+					<input
+						type="text"
+						name="facebook"
+						placeholder="Facebook URL"
+						value={facebook || ""}
+						onChange={e => setFacebook(e.target.value)}
+						className="form-element"
+					/>
+				</div>
+				<div className="form-row">
+					<span><img className="form-label-img" src="../images/www-icon.png" alt="Portfolio" /></span>
+					<input
+						type="text"
+						name="portfolio"
+						placeholder="Your Portfolio URL"
+						value={portfolio || ""}
+						onChange={e => setPortfolio(e.target.value)}
+						className="form-element"
+					/>
+				</div>
+				<label htmlFor="description">Tell the world about yourself!</label>
+
+				<QuillStyles>
+					<ReactQuill
+						name="description"
+						value={description || ""}
+						onChange={text => setDescription(text)}
+						theme="snow"
+					/>
+				</QuillStyles>
+			</form>
+			<div className="button-row">
+				<Button onClick={handleSubmit}>Save</Button>
+				<Button onClick={() => props.history.push("/")}>Cancel</Button>
+			</div>
+
+		</PersonDetailFormStyles>
+	)
 }
+
+// 	TODO: canEditDelete(profileId, permission) {
+// 		const userId = localStorage.getItem("BuiltInSouthernUtah");
+// 		if (permission === 3 || profileId === userId) {
+// 			return true
+// 		} else {
+// 			return false
+// 		}
+// 	}
+
+// 	TODO setProfileVisibility() {
+// 		if (this.state.profileVisible === true) {
+// 			this.setState({ profileVisible: false })
+// 		} else {
+// 			this.setState({ profileVisible: true })
+// 		}
+// 	}
+
+
+// 	}
+
+// 	//TODO fileUploadHandler() {
+// 		const { selectedFile } = this.state;
+// 		console.log({ selectedFile });
+
+// 		if (selectedFile) {
+// 			const headers = {
+// 				'Content-Type': 'application/json',
+// 			}
+// 			console.log("File has been selected.");
+// 			// axios.post('https://us-central1-built-in-southern-utah.cloudfunctions.net/uploadFile', selectedFile)
+// 			axios({
+// 				method: 'post',
+// 				url: 'https://us-central1-built-in-southern-utah.cloudfunctions.net/uploadFile/',
+// 				data: selectedFile,
+// 				headers
+
+// 			})
+// 				.then((response) => {
+// 					console.log("I think it effing worked...");
+// 					console.log(response)
+// 				})
+// 				.catch((err) => {
+// 					console.log("axios.post() did not succeed.")
+// 				});
+// 		} else {
+// 			console.log("No file stored in local component state.")
+// 		}
+// 	}
+// }
 
 export default withRouter(PersonDetailForm);
