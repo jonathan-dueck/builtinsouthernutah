@@ -3,7 +3,7 @@ import LoaderStyles from './loader.styles';
 
 const Loader = () => (
     <LoaderStyles>
-        <img alt="loader" src="../images/loading_icon.gif" />
+        <img alt="loader" src="/images/loading_icon.gif" />
     </LoaderStyles>
 )
 

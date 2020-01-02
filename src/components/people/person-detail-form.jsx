@@ -117,7 +117,7 @@ function PersonDetailForm(props) {
 				</div>
 
 				<div className="form-row">
-					<span><img className="form-label-img" src="../images/twitter-icon.png" alt="Twitter" /></span>
+					<span><img className="form-label-img" src="/images/twitter-icon.png" alt="Twitter" /></span>
 					<input
 						type="text"
 						name="twitter"
@@ -128,7 +128,7 @@ function PersonDetailForm(props) {
 					/>
 				</div>
 				<div className="form-row">
-					<span><img className="form-label-img" src="../images/github-icon.png" alt="Github" /></span>
+					<span><img className="form-label-img" src="/images/github-icon.png" alt="Github" /></span>
 					<input
 						type="text"
 						name="github"
@@ -139,7 +139,7 @@ function PersonDetailForm(props) {
 					/>
 				</div>
 				<div className="form-row">
-					<span><img className="form-label-img" src="../images/facebook-icon.png" alt="Facebook" /></span>
+					<span><img className="form-label-img" src="/images/facebook-icon.png" alt="Facebook" /></span>
 					<input
 						type="text"
 						name="facebook"
@@ -150,7 +150,7 @@ function PersonDetailForm(props) {
 					/>
 				</div>
 				<div className="form-row">
-					<span><img className="form-label-img" src="../images/www-icon.png" alt="Portfolio" /></span>
+					<span><img className="form-label-img" src="/images/www-icon.png" alt="Portfolio" /></span>
 					<input
 						type="text"
 						name="portfolio"
