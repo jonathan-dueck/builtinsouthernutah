@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
 const PrivacyStyles = styled.div`
-    max-width: 450px;
-    border: 1px solid #000;
-    border-radius: 10px;
+    max-width: 750px;
     margin: 0 auto;
-    padding: 2rem;
+    text-align: left;
+    padding: 4rem;
 
     @media(max-width: 37.5rem) {
       border: none;
@@ -13,12 +12,24 @@ const PrivacyStyles = styled.div`
         
     h1 {
 			font-size: 3.5rem;        
-			margin-bottom: 1rem;            
+			margin-bottom: 4rem;            
 		}
+
+    h2 {
+      font-size: 2rem;
+      margin-top: 2rem;
+      margin-bottom: 2.5rem;
+    }
 		
 		p {
-			font-size: 1.5rem;
+			font-size: 2rem;
 		}
+
+    li {
+      font-size: 2rem;
+      margin-left: 3rem;
+      margin-bottom: 1rem;
+    }
 
     .developer {
       margin-bottom: 3rem;
@@ -27,7 +38,9 @@ const PrivacyStyles = styled.div`
 			border-top: 1px solid black;
 			padding-top: 2rem;
 		}
-		
+		p {
+      margin-bottom: 10px;
+    }
 `;
 
 export default PrivacyStyles;
