@@ -20,16 +20,19 @@ class PersonDetailPage extends React.Component {
 	}
 
 	componentDidMount() {
-		// Fetch this user from the backend, getting user id from address bar
-		this.setState({ isLoading: true })
-		db.collection('profiles').where("id", "==", this.props.match.params.id)
-			.get()
-			.then((querySnapshot) => {
-				querySnapshot.forEach((doc) => {
-					doc.data()
-					this.setState({ person: doc.data(), isLoading: false });
+		if (this.props.match.params.id) {
+
+			// Fetch this user from the backend, getting user id from address bar
+			this.setState({ isLoading: true })
+			db.collection('profiles').where("id", "==", this.props.match.params.id)
+				.get()
+				.then((querySnapshot) => {
+					querySnapshot.forEach((doc) => {
+						doc.data()
+						this.setState({ person: doc.data(), isLoading: false });
+					})
 				})
-			})
+		}
 	}
 
 	refetchProfile(id) {

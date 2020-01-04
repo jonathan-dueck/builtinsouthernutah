@@ -28,7 +28,8 @@ class SignUp extends React.Component {
         db.collection('profiles').doc(result.user.uid).set({
           id: result.user.uid,
           hasProfile: false,
-          profileVisible: false
+          profileVisible: false,
+          headshotSrc: '/images/person-silhouette.png'
         })
         this.props.history.push('/people');
       })

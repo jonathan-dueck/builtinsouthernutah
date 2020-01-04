@@ -18,6 +18,10 @@ const fire = firebase.initializeApp(config);
 const googleSignIn = () => {
     var googleProvider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithRedirect(googleProvider)
+
+    firebase.auth().getRedirectResult().then(function (result) {
+        console.log("Google Signin Result: ", result);
+    })
 }
 
 // Github Signin:

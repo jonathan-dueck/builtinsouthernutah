@@ -33,14 +33,14 @@ class PersonDetail extends React.Component {
 		if (id && (loggedInUser === profileIdWeAreVisiting)) {
 			db.collection('profiles').doc(id).delete().then((result) => {
 				console.log("RESULT after delete: ", result);
-				db.collection('profiles').doc(result.user.uid).set({
-					id: result.user.uid,
+				db.collection('profiles').doc(loggedInUser).set({
+					id: loggedInUser,
 					hasProfile: false,
 					profileVisible: false,
 					headshotSrc: '/images/person-silhouette.png'
 				})
-				this.props.history.push('/people');
 				console.log("Profile has been deleted.");
+				this.props.history.push('/people');
 			})
 				.catch((err) => {
 					console.log(err);

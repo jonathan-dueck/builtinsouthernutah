@@ -61,6 +61,7 @@ class App extends React.Component {
         this.setState({ identification: userCreds })
       } else {
         console.log("No such document")
+        console.log("THIS: ", this)
       }
     }).catch((err) => {
       console.log("Error getting document", err);
@@ -75,6 +76,7 @@ class App extends React.Component {
           <Header currentUser={this.state.user} />
           <Switch>
             <Route exact path='/people' component={HomePage} />
+            <Route exact path='/people/new' component={PersonEditPage} />
             <Route exact path='/people/:id' component={PersonDetailPage} />
             <Route exact path='/people/:id/edit' component={PersonEditPage} />
             <Route exact path='/events' component={EventsPage} />

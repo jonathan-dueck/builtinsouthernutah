@@ -17,11 +17,18 @@ const SignInUpStyles = styled.div`
     }
 }
 
-.third-party-auth-row {
+.third-party-auth {
     display: flex;
+    /* flex-direction: column; */
     justify-content: space-around;
     max-width: 600px;
     margin: 0 auto;
+}
+
+.auth-button {
+    font-size: 2rem;
+    cursor:pointer;
+    
 }
 `;
 

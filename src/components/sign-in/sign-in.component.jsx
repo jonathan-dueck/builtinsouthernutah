@@ -43,6 +43,9 @@ class SignIn extends React.Component {
   signup(e) {
     e.preventDefault();
     fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then(result => {
+        this.router.push('/people/new')
+      })
       .catch((error) => {
         console.log(error);
       })
