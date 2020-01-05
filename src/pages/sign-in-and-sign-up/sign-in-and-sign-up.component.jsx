@@ -11,18 +11,16 @@ const SignInAndSignUpPage = () => {
   return (
     <SignInUpStyles>
       <div className="form-container sign-up-container">
-        Sign in with:
+        <h1>Sign In With</h1>
         <div className="third-party-auth">
-          <div className="auth-button" onClick={googleSignIn}> Google</div>
-          <div className="auth-button" onClick={gitHubSignIn}>GitHub</div>
-          <div className="auth-button" onClick={twitterSignIn}>Twitter</div>
+          <div className="auth-button" onClick={googleSignIn}> <img className="social-icon" alt="Google" src="/images/google-icon.png" /></div>
+          <div className="auth-button" onClick={gitHubSignIn}><img className="social-icon" alt="Google" src="/images/github-icon.png" /></div>
+          <div className="auth-button" onClick={twitterSignIn}><img className="social-icon" alt="Google" src="/images/twitter-logo.png" /></div>
         </div>
-        <hr />
-        <div>Or Sign In With Email and Password</div>
-        <hr />
-        <div>
-          <span onClick={() => setFormStatus('new')} className="new-user-active">New User</span>
-          <span onClick={() => setFormStatus('returning')} className="returning-user-active">Returning User</span>
+        <div>Or Use Email and Password</div>
+        <div className="auth-option-tabs">
+          <span onClick={() => setFormStatus('new')} className={`pointer ${formStatus === 'new' ? 'new-user-active' : ''}`}>New User</span>
+          <span onClick={() => setFormStatus('returning')} className={`pointer ${formStatus === 'returning' ? 'returning-user-active' : ''}`}>Returning User</span>
         </div>
 
         {

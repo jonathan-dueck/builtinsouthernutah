@@ -1,34 +1,45 @@
 import styled from 'styled-components';
 
 const SignInUpStyles = styled.div`
-.switch-state {
-    width: 30rem;
-    border: 1px solid black;
-    border-radius: 3px;
-    margin: 0.2rem auto;
-    padding: 2rem;
-    font-size: 1.5rem;
-    transition: 0.2s ease-out;
-
-
-    &:hover {
-        background-color: #012c6a;
-        color: #fff;
-    }
-}
+font-size: 2rem;
 
 .third-party-auth {
     display: flex;
     /* flex-direction: column; */
     justify-content: space-around;
     max-width: 600px;
-    margin: 0 auto;
+    margin: 3rem auto;
 }
 
 .auth-button {
     font-size: 2rem;
     cursor:pointer;
     
+}
+.new-user-active {
+    background-color: navy;
+    color: white;
+    padding: 1rem;
+    margin: 2rem;
+}
+
+.returning-user-active {
+    background-color: navy;
+    color: white;
+    padding: 1rem;
+    margin: 2rem;
+}
+
+.social-icon {
+    max-height: 60px;
+}
+
+.auth-option-tabs {
+    margin: 2rem auto;
+}
+
+.pointer {
+    cursor:pointer;
 }
 `;
 
