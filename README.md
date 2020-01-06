@@ -1,9 +1,14 @@
+# Built In Southern Utah
+- This is a side project serving the dev / tech community in and near St. George, Utah. Inquiries: 
+- hello@jonathandueck.com
+
 # Setup Instructions
 
 ### Install the project in a local directory by typing: 
-git clone git@github.com:MNtoNM/builtinsouthernutah.git builtinsouthernutah
+git clone git@github.com:MNtoNM/builtinsouthernutah.git
+- Visit the project directory: cd builtinsouthernutah
 - type 'npm i' to install required packages.
-- type 'npm run start' to launch development environment.
+- type 'npm run start' to launch Vue-CLI development environment. (You may need to visit http://localhost:8080 manually in your browser.)
 - Additional options are detailed below:
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
