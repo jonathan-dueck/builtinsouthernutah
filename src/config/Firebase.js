@@ -28,12 +28,20 @@ const googleSignIn = () => {
 const gitHubSignIn = () => {
     var githubProvider = new firebase.auth.GithubAuthProvider();
     firebase.auth().signInWithRedirect(githubProvider)
+
+    firebase.auth().getRedirectResult().then(function (result) {
+        console.log("Github Signin Result: ", result);
+    })
 }
 
 // Twitter Signin:
 const twitterSignIn = () => {
     var twitterProvider = new firebase.auth.TwitterAuthProvider();
     firebase.auth().signInWithRedirect(twitterProvider);
+
+    firebase.auth().getRedirectResult().then(function (result) {
+        console.log("Twitter Signin Result: ", result);
+    })
 
 }
 
