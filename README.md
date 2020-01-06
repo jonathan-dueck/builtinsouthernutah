@@ -1,3 +1,11 @@
+# Setup Instructions
+
+### Install the project in a local directory by typing: 
+git clone git@github.com:MNtoNM/builtinsouthernutah.git builtinsouthernutah
+- type 'npm i' to install required packages.
+- type 'npm run start' to launch development environment.
+- Additional options are detailed below:
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
