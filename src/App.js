@@ -71,27 +71,28 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <UserContext.Provider value={this.state.identification}>
+        <div className="content">
+          <UserContext.Provider value={this.state.identification}>
 
-          <Header currentUser={this.state.user} />
-          <Switch>
-            <Route exact path='/people' component={HomePage} />
-            <Route exact path='/people/new' component={PersonEditPage} />
-            <Route exact path='/people/:id' component={PersonDetailPage} />
-            <Route exact path='/people/:id/edit' component={PersonEditPage} />
-            <Route exact path='/events' component={EventsPage} />
-            <Route exact path='/companies' component={CompaniesPage} />
-            <Route exact path='/projects' component={ProjectsPage} />
-            <Route exact path='/about' component={AboutPage} />
-            <Route exact path='/signup' render={() => (this.state.user && !this.state.user.length === 0) ? (<Redirect to='/people' />) : (<SignInAndSignUp />)} />
-            <Route exact path='/privacy-policy' component={PrivacyPolicy} />
-            <Route exact path='/' component={HomePage} />
-          </Switch>
+            <Header currentUser={this.state.user} />
+            <Switch>
+              <Route exact path='/people' component={HomePage} />
+              <Route exact path='/people/new' component={PersonEditPage} />
+              <Route exact path='/people/:id' component={PersonDetailPage} />
+              <Route exact path='/people/:id/edit' component={PersonEditPage} />
+              <Route exact path='/events' component={EventsPage} />
+              <Route exact path='/companies' component={CompaniesPage} />
+              <Route exact path='/projects' component={ProjectsPage} />
+              <Route exact path='/about' component={AboutPage} />
+              <Route exact path='/signup' render={() => (this.state.user && !this.state.user.length === 0) ? (<Redirect to='/people' />) : (<SignInAndSignUp />)} />
+              <Route exact path='/privacy-policy' component={PrivacyPolicy} />
+              <Route exact path='/' component={HomePage} />
+            </Switch>
 
-          <Footer />
+            <Footer />
 
-        </UserContext.Provider>
-
+          </UserContext.Provider>
+        </div>
       </div>
     );
   }
