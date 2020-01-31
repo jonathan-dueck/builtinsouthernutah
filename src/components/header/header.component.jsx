@@ -79,6 +79,8 @@ const Header = (props) => {
 				</AppBar>
 			</Link>
 			<div className={classes.navLinkRow}>
+				<a href="/" className={classes.navButton}>People</a>
+
 				{
 					currentUser && (
 						<a href={`/people/${currentUser.uid}`} className={classes.navButton}>Your Profile</a>

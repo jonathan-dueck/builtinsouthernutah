@@ -4,9 +4,9 @@ const PersonCardStyles = styled.div`
     width: 300px;
     min-height: 400px;
     background-color: #fff;
-    box-shadow: 3px 3px 12px rgba(0,0,0,0.5);
-    border: 1px solid black;
     margin: 0 2rem 3.5rem 2rem;
+    /* box-shadow: 3px 3px 12px rgba(0,0,0,0.5); */
+    /* border: 1px solid black; */
 
 
 a {
