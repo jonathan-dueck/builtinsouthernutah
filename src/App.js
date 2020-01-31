@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import Header from './components/header/header.component';
-// import HeaderNew from './components/header/header_new';
 import Footer from './components/footer/footer.component';
 import HomePage from './pages/homepage/homepage.component';
 import AboutPage from './pages/aboutpage/aboutpage.component';
@@ -89,9 +88,7 @@ class App extends React.Component {
               <Route exact path='/privacy-policy' component={PrivacyPolicy} />
               <Route exact path='/' component={HomePage} />
             </Switch>
-
             <Footer />
-
           </UserContext.Provider>
         </div>
       </div>
