@@ -3,6 +3,7 @@ import AppBar from '@material-ui/core/AppBar';
 import ToolBar from '@material-ui/core/ToolBar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 import { withRouter } from 'react-router-dom';
 import fire from '../../config/Firebase';
@@ -37,7 +38,6 @@ const useStyles = makeStyles(theme => ({
 	},
 	navButton: {
 		borderRadius: '2px',
-		padding: '1rem 0',
 		opacity: '0.8',
 		display: 'inline-block',
 		backgroundColor: '#fff',
@@ -45,7 +45,8 @@ const useStyles = makeStyles(theme => ({
 		color: 'black',
 		textDecoration: 'none',
 		margin: '1.5rem',
-		padding: '1rem 1.5rem'
+		padding: '1rem 1.5rem',
+		cursor: 'pointer'
 	},
 
 }))
@@ -62,23 +63,25 @@ const Header = (props) => {
 	console.log({ currentUser });
 	return (
 		<Fragment>
-			<AppBar>
-				<ToolBar className={classes.toolbar}>
-					<img className={classes.logo} src="images/logo.png" />
-					<div className="text">
-						<Typography variant="h2" className={classes.headline}>
-							Built In Southern Utah
+			<Link to="/">
+				<AppBar>
+					<ToolBar className={classes.toolbar}>
+						<img alt="Built in Southern Utah" className={classes.logo} src="/images/logo.png" />
+						<div className="text">
+							<Typography variant="h2" className={classes.headline}>
+								Built In Southern Utah
                     </Typography>
-						<Typography variant="h5" className={classes.subHeadline}>
-							Dedicated to energizing the Southern Utah technology community
+							<Typography variant="h5" className={classes.subHeadline}>
+								Dedicated to energizing the Southern Utah technology community
                     </Typography>
-					</div>
-				</ToolBar>
-			</AppBar>
+						</div>
+					</ToolBar>
+				</AppBar>
+			</Link>
 			<div className={classes.navLinkRow}>
 				{
 					currentUser && (
-						<a href={`/people/${currentUser.uid}`} className={`button ${(currentUser.uid === props.location.pathname.replace("/people/", "")) ? 'active' : ''}`}>Your Profile</a>
+						<a href={`/people/${currentUser.uid}`} className={classes.navButton}>Your Profile</a>
 					)
 				}
 
@@ -88,7 +91,7 @@ const Header = (props) => {
 				<a href="/about" className={classes.navButton}>About</a>
 				{
 					currentUser ?
-						<button onClick={logout} className="sign-out">Sign Out</button>
+						<button onClick={logout} className={classes.navButton}>Sign Out</button>
 						:
 						<a href="/signup" className={classes.navButton}>Login</a>
 				}
