@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../../config/Firebase';
-import PersonCard from './person-card-new.component';
+import PersonCard from './person-card.component';
 
 import ResultStyles from './people-results.styles';
 import Loader from '../loader/loader.component';
