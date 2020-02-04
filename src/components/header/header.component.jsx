@@ -60,7 +60,6 @@ const Header = (props) => {
 
 	const classes = useStyles();
 	const { currentUser } = props;
-	console.log({ currentUser });
 	return (
 		<Fragment>
 			<Link to="/">
