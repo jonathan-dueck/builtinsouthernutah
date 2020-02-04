@@ -4,9 +4,11 @@ import ToolBar from '@material-ui/core/ToolBar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import { withRouter } from 'react-router-dom';
 import fire from '../../config/Firebase';
+
 
 const useStyles = makeStyles(theme => ({
 	text: {
@@ -52,6 +54,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Header = (props) => {
+	const isMobile = useMediaQuery("(max-width: 540px)");
 
 	const logout = () => {
 		props.history.push("/people");
@@ -70,9 +73,11 @@ const Header = (props) => {
 							<Typography variant="h2" className={classes.headline}>
 								Built In Southern Utah
                     </Typography>
-							<Typography variant="h5" className={classes.subHeadline}>
-								Dedicated to energizing the Southern Utah technology community
-                    </Typography>
+							{!isMobile &&
+								<Typography variant="h5" className={classes.subHeadline}>
+									Dedicated to energizing the Southern Utah technology community
+                    </Typography
+								>}
 						</div>
 					</ToolBar>
 				</AppBar>
