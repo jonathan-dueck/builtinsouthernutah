@@ -2,8 +2,6 @@ import styled from 'styled-components';
 
 const AboutStyles = styled.div`
     max-width: 450px;
-    border: 1px solid #000;
-    border-radius: 10px;
     margin: 0 auto;
     padding: 2rem;
 

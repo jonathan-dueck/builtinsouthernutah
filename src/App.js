@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
+// import './index.css';
 import Header from './components/header/header.component';
-// import Footer from './components/footer/footer.component';
+import Footer from './components/footer/footer.component';
 import HomePage from './pages/homepage/homepage.component';
 import AboutPage from './pages/aboutpage/aboutpage.component';
 import CompaniesPage from './pages/companiespage/companiespage.component';
@@ -71,6 +72,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <div className="bgImage"></div>
         <div className="content">
           <UserContext.Provider value={this.state.identification}>
 
@@ -88,9 +90,10 @@ class App extends React.Component {
               <Route exact path='/privacy-policy' component={PrivacyPolicy} />
               <Route exact path='/' component={HomePage} />
             </Switch>
-            {/* <Footer /> */}
+            <Footer />
           </UserContext.Provider>
         </div>
+        <div className="pageOpacity"></div>
       </div>
     );
   }

@@ -6,9 +6,10 @@ import PeopleResults from '../../components/people/people-results.component';
 
 const HomePage = () => (
     <Fragment>
-        <h1>People</h1>
         <PersonGridStyles>
-            <PeopleResults />
+            <h1 style={{ color: 'black' }}>Under Construction</h1>
+            {/* <PeopleResults /> */}
+
         </PersonGridStyles>
     </Fragment>
 )

@@ -87,7 +87,7 @@ const Header = (props) => {
 
 				{
 					currentUser && (
-						<a href={`/people/${currentUser.uid}`} className={classes.navButton}>Your Profile</a>
+						<a href={`/people/${currentUser.uid || ""}/edit`} className={classes.navButton}>Your Profile</a>
 					)
 				}
 
