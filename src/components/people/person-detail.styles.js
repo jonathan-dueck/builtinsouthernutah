@@ -1,7 +1,46 @@
 import styled from 'styled-components';
 
 const PersonDetailStyles = styled.div`
-        display: flex;   
+        @media(max-width: 56.25rem) {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+    display: flex;
+    width: 100%;
+    .social-links {
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        /* height: 50px; */
+    }
+    .person-detail-left, .person-detail-right {
+        display: flex;
+        flex-direction: column;
+    }
+    .social-logo a img {
+        width: 30px;
+        padding: 10px;
+        transition: .3s;
+
+        &:hover {
+            margin-top: 10px; 
+        }
+    }
+
+    .person-detail-right {
+        align-items: center;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+    }
+
+    .user-description {
+        margin-top: 2rem;
+    }
+        /* display: flex;   
         justify-content: space-around; 
 
         @media(max-width: 56.25rem) {
@@ -64,11 +103,7 @@ const PersonDetailStyles = styled.div`
 					padding: 0;
 				}
     }
-    .social-links {
-        display: flex;
-        justify-content: center;
-        height: 50px;
-    }
+
     .social-logo a img {
         width: 30px;
         padding: 10px;
@@ -81,7 +116,7 @@ const PersonDetailStyles = styled.div`
     }
     .social-url {
         font-size: 2rem;
-    }
+    } */
 `;
 
 export default PersonDetailStyles;

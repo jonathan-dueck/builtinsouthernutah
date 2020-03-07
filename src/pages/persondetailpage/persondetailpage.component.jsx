@@ -66,55 +66,26 @@ class PersonDetailPage extends React.Component {
 		const id = this.props.match.params.id;
 		return (
 			<Fragment>
+				<UserContext.Consumer>
+					{user => (
+						<PersonDetail
+							id={id}
+							title={title}
+							displayName={displayName}
+							headshotSrc={headshotSrc}
+							description={description}
+							editMode={this.toggleState}
+							permission={user.permission}
+							profileVisible={profileVisible}
+							facebook={facebook}
+							twitter={twitter}
+							linkedin={linkedin}
+							github={github}
+							portfolio={portfolio}
+						/>
+					)}
 
-				{editMode || (!hasProfile) ?
-
-					<UserContext.Consumer>
-						{user => (
-							<PersonDetailForm
-								id={id}
-								title={title}
-								displayName={displayName}
-								headshotSrc={headshotSrc}
-								description={description}
-								editMode={this.toggleState}
-								permission={user.permission}
-								profileVisible={profileVisible}
-								facebook={facebook}
-								twitter={twitter}
-								linkedin={linkedin}
-								github={github}
-								portfolio={portfolio}
-								refetchProfile={this.refetchProfile}
-							/>
-						)}
-					</UserContext.Consumer>
-
-					:
-
-					<UserContext.Consumer>
-						{user => (
-							<PersonDetail
-								id={id}
-								title={title}
-								displayName={displayName}
-								headshotSrc={headshotSrc}
-								description={description}
-								editMode={this.toggleState}
-								permission={user.permission}
-								profileVisible={profileVisible}
-								facebook={facebook}
-								twitter={twitter}
-								linkedin={linkedin}
-								github={github}
-								portfolio={portfolio}
-							/>
-						)}
-
-					</UserContext.Consumer>
-				}
-
-
+				</UserContext.Consumer>
 			</Fragment>
 		);
 	}
