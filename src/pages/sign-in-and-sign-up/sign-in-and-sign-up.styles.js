@@ -2,6 +2,15 @@ import styled from 'styled-components';
 
 const SignInUpStyles = styled.div`
 font-size: 2rem;
+display: flex;
+justify-content: center;
+
+.form-container {
+    /* border: 1px solid black; */
+    flex-direction: column;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
 
 .third-party-auth {
     display: flex;

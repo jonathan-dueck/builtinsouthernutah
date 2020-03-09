@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 // import './index.css';
 import Header from './components/header/header.component';
@@ -18,24 +18,15 @@ import fire, { db } from './config/Firebase';
 
 const UserContext = React.createContext();
 
-class App extends React.Component {
+const App = () => {
+  const [user, setUser] = useState({});
+  const [identification, setIdentification] = useState({});
 
-  constructor(props) {
-    super(props);
+  useEffect(() => {
+    authListener();
+  });
 
-    this.state = {
-      user: {},
-      identification: {}
-    }
-    this.authListener = this.authListener.bind(this);
-    this.getContext = this.getContext.bind(this);
-  }
-
-  componentDidMount() {
-    this.authListener();
-  }
-
-  authListener() {
+  const authListener = () => {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({ user });
@@ -46,9 +37,9 @@ class App extends React.Component {
         localStorage.removeItem('user');
       }
     })
-  };
+  }
 
-  getContext() {
+  const getContext = () => {
     const uid = localStorage.getItem('BuiltInSouthernUtah');
     const docRef = db.collection('profiles').doc(uid);
 
@@ -69,35 +60,116 @@ class App extends React.Component {
     })
   }
 
-  render() {
-    return (
-      <div className="App">
-        <div className="bgImage"></div>
-        <div className="content">
-          <UserContext.Provider value={this.state.identification}>
+  return (
+    <div className="App">
+      <div className="bgImage"></div>
+      <div className="content">
+        <UserContext.Provider value={identification}>
 
-            <Header currentUser={this.state.user} />
-            <Switch>
-              <Route exact path='/people' component={HomePage} />
-              <Route exact path='/people/new' component={PersonEditPage} />
-              <Route exact path='/people/:id' component={PersonDetailPage} />
-              <Route exact path='/people/:id/edit' component={PersonEditPage} />
-              <Route exact path='/events' component={EventsPage} />
-              <Route exact path='/companies' component={CompaniesPage} />
-              <Route exact path='/projects' component={ProjectsPage} />
-              <Route exact path='/about' component={AboutPage} />
-              <Route exact path='/signup' render={() => (this.state.user && !this.state.user.length === 0) ? (<Redirect to='/people' />) : (<SignInAndSignUp />)} />
-              <Route exact path='/privacy-policy' component={PrivacyPolicy} />
-              <Route exact path='/' component={HomePage} />
-            </Switch>
-            <Footer />
-          </UserContext.Provider>
-        </div>
-        <div className="pageOpacity"></div>
+          <Header currentUser={user} />
+          <Switch>
+            <Route exact path='/people' component={HomePage} />
+            <Route exact path='/people/new' component={PersonEditPage} />
+            <Route exact path='/people/:id' component={PersonDetailPage} />
+            <Route exact path='/people/:id/edit' component={PersonEditPage} />
+            <Route exact path='/events' component={EventsPage} />
+            <Route exact path='/companies' component={CompaniesPage} />
+            <Route exact path='/projects' component={ProjectsPage} />
+            <Route exact path='/about' component={AboutPage} />
+            <Route exact path='/signup' render={() => (user && !user.length === 0) ? (<Redirect to='/people' />) : (<SignInAndSignUp />)} />
+            <Route exact path='/privacy-policy' component={PrivacyPolicy} />
+            <Route exact path='/' component={HomePage} />
+          </Switch>
+          {/* <Footer /> */}
+        </UserContext.Provider>
       </div>
-    );
-  }
+      <div className="pageOpacity"></div>
+    </div>
+  );
+
 }
+
+
+// class App extends React.Component {
+
+//   constructor(props) {
+//     super(props);
+
+//     this.state = {
+//       user: {},
+//       identification: {}
+//     }
+//     this.authListener = this.authListener.bind(this);
+//     this.getContext = this.getContext.bind(this);
+//   }
+
+//   componentDidMount() {
+//     this.authListener();
+//   }
+
+// authListener() {
+//   fire.auth().onAuthStateChanged((user) => {
+//     if (user) {
+//       this.setState({ user });
+//       localStorage.setItem('BuiltInSouthernUtah', user.uid);
+//       this.getContext();
+//     } else {
+//       this.setState({ user: null });
+//       localStorage.removeItem('user');
+//     }
+//   })
+// };
+
+//   getContext() {
+// const uid = localStorage.getItem('BuiltInSouthernUtah');
+// const docRef = db.collection('profiles').doc(uid);
+
+// docRef.get().then((doc) => {
+//   if (doc.exists) {
+//     const userData = doc.data();
+//     const userCreds = {
+//       permission: userData.permission,
+//       id: userData.id
+//     }
+//     this.setState({ identification: userCreds })
+//   } else {
+//     console.log("No such document")
+//     console.log("THIS: ", this)
+//   }
+// }).catch((err) => {
+//   console.log("Error getting document", err);
+// })
+//   }
+
+//   render() {
+//     return (
+// <div className="App">
+//   <div className="bgImage"></div>
+//   <div className="content">
+//     <UserContext.Provider value={this.state.identification}>
+
+//       <Header currentUser={this.state.user} />
+//       <Switch>
+//         <Route exact path='/people' component={HomePage} />
+//         <Route exact path='/people/new' component={PersonEditPage} />
+//         <Route exact path='/people/:id' component={PersonDetailPage} />
+//         <Route exact path='/people/:id/edit' component={PersonEditPage} />
+//         <Route exact path='/events' component={EventsPage} />
+//         <Route exact path='/companies' component={CompaniesPage} />
+//         <Route exact path='/projects' component={ProjectsPage} />
+//         <Route exact path='/about' component={AboutPage} />
+//         <Route exact path='/signup' render={() => (this.state.user && !this.state.user.length === 0) ? (<Redirect to='/people' />) : (<SignInAndSignUp />)} />
+//         <Route exact path='/privacy-policy' component={PrivacyPolicy} />
+//         <Route exact path='/' component={HomePage} />
+//       </Switch>
+//       {/* <Footer /> */}
+//     </UserContext.Provider>
+//   </div>
+//   <div className="pageOpacity"></div>
+// </div>
+//     );
+//   }
+// }
 
 export { UserContext };
 export default App;
